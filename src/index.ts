@@ -1,4 +1,4 @@
-import mysql, { Connection, ConnectionOptions , QueryError } from 'mysql2/promise';
+import mysql, { Connection, ConnectionOptions, QueryError } from 'mysql2/promise';
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 
@@ -6,14 +6,10 @@ import cors from '@fastify/cors';
 const app = fastify();
 app.register(cors);
 
-app.get("/", (request: FastifyRequest, reply: FastifyReply) => {
-    reply.send('Fastify Funciona!');
-});
-
 app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
-    
+
     try {
-    
+
         const conn = await mysql.createConnection({
             host: 'localhost',
             user: 'root',
@@ -24,9 +20,13 @@ app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
 
         console.log('Login efetuado em um Database SQL');
 
+        const [resultado, Tabela] = await conn.query('SELECT * FROM alunos');
+        reply.send(resultado);
 
-    
-    } catch (erro:any) {
+
+        await conn.end();
+
+    } catch (erro: any) {
 
         switch (erro.code) {
 
@@ -65,7 +65,7 @@ app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
 
             default:
                 console.log(`Ouve um erro: ${erro}`)
-                
+
                 console.log('Erro indefinido');
                 reply.send("ERRO: Indefinido")
                 break;
