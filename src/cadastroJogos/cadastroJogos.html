@@ -11,16 +11,30 @@
 
 <body>
 
-<div>
-    <form onsubmit="event.preventDefault();trataForm()">
-        <input type="text" id="id" name="id" placeholder="Id">
-        <input type="text" name="nome" id="nome" placeholder="Nome">
-        <input type="text" name="nome" id="preco" placeholder="Preco">
-        <input type="text" name="nome" id="produtor" placeholder="Produtor">
+    <header>
+        <a href="../Home/index.html">
+            <button class="botao_home" type="button">
+                <img src="https://static.thenounproject.com/png/2137554-200.png" alt="HOME" 
+                    width="50px"
+                    height="50px">
+            </button>
+        </a>
+    </header>
 
-        <input type="submit" value="Enviar">
-    </form>
-</div>
+    <div class="centro">
+
+        <form onsubmit="event.preventDefault();enviaBancoJogos()">
+
+            <input type="text" id="id" name="id" placeholder="Id">
+            <input type="text" name="nome" id="nome" placeholder="Nome">
+            <input type="text" name="nome" id="preco" placeholder="Preço">
+            <input type="text" name="nome" id="produtor" placeholder="Produtor">
+
+            <input type="submit" value="Enviar">
+
+        </form>
+
+    </div>
 
 </body>
 

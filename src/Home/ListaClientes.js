@@ -1,21 +1,18 @@
 async function enviaBancoJogos() {
     const idInput = document.getElementById('id');
     const idNome = document.getElementById('nome');
-    const idPreco = document.getElementById('preco');
-    const idProdutor = document.getElementById('produtor');
+   
 
     let id = idInput.value;
     let nome = idNome.value;
-    let preco = idPreco.value;
-    let produtor = idProdutor.value;
+
 
 
     const obj = {
 
         id,
-        nome,
-        preco,
-        produtor
+        nome
+      
 
     }
 
@@ -32,11 +29,11 @@ async function enviaBancoJogos() {
         switch (resposta.status) {
 
             case 404:
-                alert('Algo deu errado! Jogo não adicionado a Biblioteca.');
+                alert('Algo deu errado! cliente não adicionado .');
                 break;
 
             case 200:
-                alert('Jogo cadastrado com sucesso a Biblioteca.');
+                alert('cliente cadastrado com sucesso.');
                 break;
 
             default:
