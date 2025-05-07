@@ -1,41 +1,227 @@
+/* Importação da fonte (opcional, mas recomendado para consistência) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Variáveis de Cor (CSS Custom Properties) com a sua paleta original */
+:root {
+    /* Cores principais do seu tema original */
+    --cor-fundo-principal: #1A2A3D;
+    --cor-texto-principal: #C5C3C0;
+
+    /* Cores para elementos do formulário, derivadas ou adaptadas */
+    --cor-fundo-container: #20354b; /* Um tom ligeiramente mais claro que o fundo principal para contraste sutil */
+    --cor-texto-label: #AEAEAE;    /* Um pouco mais suave que o texto principal para labels */
+    
+    --cor-input-texto: var(--cor-texto-principal);
+    --cor-input-fundo: #253c54; /* Fundo do input um pouco diferente do principal */
+    --cor-input-borda: #4A6572;
+    --cor-input-foco-borda: lightblue; /* Usando 'lightblue' como um tom de azul claro para foco */
+
+    /* Botão: Usaremos um cinza claro/azulado para o botão, já que não há um "primário" definido */
+    --cor-botao-primario: #5A7D9A; 
+    --cor-botao-primario-hover: #78909C;
+    --cor-botao-texto: #FFFFFF;
+
+    /* Cores de Sucesso (da sua paleta) */
+    --cor-sucesso-fundo: blue;
+    --cor-sucesso-texto: aliceblue;
+    --cor-sucesso-borda: var(--cor-texto-principal); /* #C5C3C0 */
+
+    /* Cores de Erro (da sua paleta, com ajuste no texto para legibilidade) */
+    --cor-erro-fundo: red;
+    --cor-erro-texto: aliceblue; /* AJUSTADO de 'black' para 'aliceblue' para melhor contraste com fundo 'red' */
+    --cor-erro-borda: rgb(39, 0, 0);
+
+    --sombra-container: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset básico e Estilos Globais */
 * {
-    margin: 0px;
-    color: #C5C3C0;
-    background-color: #1A2A3D;
-    font-family: sans-serif;
-    align-items: center;
-}
-.tudo{
-    align-items: center;
-}
-#cadastro-form div{
-    margin-bottom: 10px;
-}
-label{
-    display: block;
-    margin-bottom: 5px;
-}
-input{
-    width: 25%;
-    padding: 8px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 20px; /* Espaço para o header não sobrepor */
+}
+
+header {
+    width: 100%;
+    padding: 15px 30px;
+    background-color: var(--cor-fundo-container);
+    box-shadow: var(--sombra-container);
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.botao_home_link {
+    display: flex;
     align-items: center;
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
-button:hover{
-    background-color: #1A2A3D;
+
+.botao_home_link:hover,
+.botao_home_link:focus {
+    background-color: var(--cor-input-fundo); /* Reutilizando cor de input para hover */
+    outline: none;
 }
-#user-mensage-area{
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 4px;
+
+.home_icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+    filter: brightness(0) invert(1); /* Mantém o ícone branco */
 }
-.success{
-    background-color: blue;
-    color: aliceblue;
-    border: 1px solid #C5C3C0;
+
+/* Container Principal */
+.container-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: 80px; 
 }
-.error{
-    background-color: red;
-    color: black;
-    border: 1px solid rgb(39, 0, 0);
+
+.formulario-container {
+    background-color: var(--cor-fundo-container);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-container);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.formulario-container h2 {
+    color: var(--cor-texto-principal);
+    margin-bottom: 25px;
+    font-weight: 500;
+    font-size: 1.8em;
+}
+
+/* Estilos dos Campos do Formulário */
+.campo-formulario {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.campo-formulario label {
+    display: block;
+    color: var(--cor-texto-label);
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+.campo-formulario input[type="text"],
+.campo-formulario input[type="email"],
+.campo-formulario input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--cor-input-borda);
+    border-radius: 6px;
+    background-color: var(--cor-input-fundo);
+    color: var(--cor-input-texto);
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campo-formulario input[type="text"]::placeholder,
+.campo-formulario input[type="email"]::placeholder,
+.campo-formulario input[type="password"]::placeholder {
+    color: var(--cor-texto-label);
+    opacity: 0.7;
+}
+
+.campo-formulario input[type="text"]:focus,
+.campo-formulario input[type="email"]:focus,
+.campo-formulario input[type="password"]:focus {
+    outline: none;
+    border-color: var(--cor-input-foco-borda);
+    box-shadow: 0 0 0 3px rgba(173, 216, 230, 0.3); /* Sombra de foco para lightblue */
+}
+
+/* Botão de Submit */
+.botao-submit {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--cor-botao-primario);
+    color: var(--cor-botao-texto);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.botao-submit:hover,
+.botao-submit:focus {
+    background-color: var(--cor-botao-primario-hover);
+    outline: none;
+}
+
+.botao-submit:active {
+    transform: scale(0.98);
+}
+
+/* Área de Mensagens (Sucesso/Erro) */
+.mensagem-area {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    text-align: center;
+    display: none; 
+}
+
+.mensagem-area.success {
+    background-color: var(--cor-sucesso-fundo);
+    color: var(--cor-sucesso-texto);
+    border: 1px solid var(--cor-sucesso-borda);
+    display: block; 
+}
+
+.mensagem-area.error {
+    background-color: var(--cor-erro-fundo);
+    color: var(--cor-erro-texto); /* Texto ajustado para aliceblue */
+    border: 1px solid var(--cor-erro-borda);
+    display: block; 
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 600px) {
+    .formulario-container {
+        padding: 20px;
+        margin: 0 15px; 
+    }
+
+    .formulario-container h2 {
+        font-size: 1.5em;
+    }
+
+    .campo-formulario input[type="text"],
+    .campo-formulario input[type="email"],
+    .campo-formulario input[type="password"],
+    .botao-submit {
+        font-size: 0.95em;
+    }
 }

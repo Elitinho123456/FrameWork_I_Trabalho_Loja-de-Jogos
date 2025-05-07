@@ -1,5 +1,9 @@
 const usuaForm = document.getElementById('cadastro-usuario-form');
-const usuaMessageArea = document.getElementById('user-mensage-area');
+const usuaMessageArea = document.getElementById('user-message-area');
+
+const emailImput = document.getElementById('email');
+const nomeImput = document.getElementById('nome');
+const senhaImput = document.getElementById('senha');
 
 //adicione o listener no formulario
 
@@ -26,7 +30,7 @@ async function trataFormCadastroUsua(event) {
     };
 
     try {
-        const resposta = await fetch("http://localhost:5000/", {
+        const resposta = await fetch("http://localhost:5000/usuario", {
             method: "POST",
             headers:{
                 'Content-Type': 'application/json'
@@ -49,7 +53,7 @@ async function trataFormCadastroUsua(event) {
 
 }
 
-function displayUsuamessageArea(message, tpye){
+function displayUsuamessageArea(message, type){
     usuaMessageArea.textContent = message;
     usuaMessageArea.className = type;
 }

@@ -4,42 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="cadastroUsua.css" rel="stylesheet">
 </head>
 
-<header>
-    <a href="../Home/index.html">
-        <button class="botao_home" type="button">
-            <img src="https://static.thenounproject.com/png/2137554-200.png" alt="HOME" 
-                width="50px"
-                height="50px">
-        </button>
-    </a>
-</header>
 
 <body>
-    <div class="tudo">
-    <form onsumbit="event.preventDefault();trataformCadastroUsua()" id="cadastro-usuario-form">
-        <div>
-            <label for="usuaNome">Nome:</label>
-            <input type="text" name="nome" id="nome">
-        </div>
-        
-        <div>
-            <label for="usuaEmail">Email:</label>
-            <input type="text" name="email" id="email">
-        </div>
 
-        <div>
-            <label for="usuaSenha">Senha:</label>
-            <input type="password" name="senha" id="senha">
+    <header>
+        <a href="../Home/index.html" class="botao_home_link" aria-label="Voltar para a página inicial">
+            <img src="https://static.thenounproject.com/png/2137554-200.png" alt="Ícone Home" class="home_icon">
+            <span>Início</span>
+        </a>
+    </header>
+
+    <main class="container-principal">
+        <div class="formulario-container">
+            <h2>Criar Nova Conta</h2>
+            <form id="cadastro-usuario-form">
+                <div class="campo-formulario">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" name="nome" id="nome" placeholder="Seu nome completo" required>
+                </div>
+                
+                <div class="campo-formulario">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="senha" id="senha" placeholder="Pelo menos 6 caracteres" required>
+                </div>
+
+                <button type="submit" class="botao-submit">Criar Conta</button>
+            </form>
+            <div id="user-message-area" class="mensagem-area" role="alert">
+                </div>
         </div>
-
-        <input type="submit" value="Enviar">
-
-    </form>
-    <div id="user-mensage-area"></div>
-</div>
-         <script src="cadastroUsua.js"></script>
+    </main>
+    <script src="cadastroUsua.js"></script>
 </body>
 </html>
