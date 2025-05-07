@@ -16,7 +16,7 @@ async function trataFormCadastroUsua(event) {
     const senha = senhaImput.value;
 
     if (!nome || !email || !senha) {
-        displaytUsermessageArea('Por favor, preencha todos os campos.', 'error');
+        displayUsuamessageArea('Por favor, preencha todos os campos.', 'error');
         return;
     }
     const usuaDados = {
@@ -26,9 +26,30 @@ async function trataFormCadastroUsua(event) {
     };
 
     try {
-        const resposta = await fetch("http://localhost:5000/Clientes");
-    } catch (error) {
+        const resposta = await fetch("http://localhost:5000/", {
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuaDados)
+        });
+        const result = await resposta.json();
+
+        if(resposta.ok){
+            displayUsuamessageArea(result.message || "Usuário ADICIONADO com sucesso!!", 'success');
+            usuaForm.reset();
+        }else{
+            displayUsuamessageArea(result.error || `Erro ao adicionar usuário (status: ${resposta.status})`, 'error');
+        }
         
+    } catch (erro) {
+        console.error("Erro na requisição:", erro),
+        displayUsuamessageArea("Erro de comunicação com o servidor. Tente novamente.", 'error');
     }
 
+}
+
+function displayUsuamessageArea(message, tpye){
+    usuaMessageArea.textContent = message;
+    usuaMessageArea.className = type;
 }

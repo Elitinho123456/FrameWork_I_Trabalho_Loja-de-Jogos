@@ -35,9 +35,13 @@ async function enviaBancoJogos() {
             case 200:
                 alert('cliente cadastrado com sucesso.');
                 break;
-
-            default:
-                alert('Erro inesperado.');
+              
+                case 400:
+                    alert('Algo deu errado na requisição, arruma ai seus gays :3.');
+                    break;
+               
+                    default:
+                alert('Erro inesperadoUwU.');
                 break;
 
         }

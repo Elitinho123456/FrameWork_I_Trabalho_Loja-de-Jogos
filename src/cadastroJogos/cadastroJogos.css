@@ -32,7 +32,7 @@ header {
     background-color: #171D25;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .centro {

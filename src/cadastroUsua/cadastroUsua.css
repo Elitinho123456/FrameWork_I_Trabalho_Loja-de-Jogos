@@ -1,0 +1,41 @@
+* {
+    margin: 0px;
+    color: #C5C3C0;
+    background-color: #1A2A3D;
+    font-family: sans-serif;
+    align-items: center;
+}
+.tudo{
+    align-items: center;
+}
+#cadastro-form div{
+    margin-bottom: 10px;
+}
+label{
+    display: block;
+    margin-bottom: 5px;
+}
+input{
+    width: 25%;
+    padding: 8px;
+    box-sizing: border-box;
+    align-items: center;
+}
+button:hover{
+    background-color: #1A2A3D;
+}
+#user-mensage-area{
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+.success{
+    background-color: blue;
+    color: aliceblue;
+    border: 1px solid #C5C3C0;
+}
+.error{
+    background-color: red;
+    color: black;
+    border: 1px solid rgb(39, 0, 0);
+}
