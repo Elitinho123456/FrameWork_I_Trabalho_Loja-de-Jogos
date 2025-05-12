@@ -12,6 +12,8 @@ if(usuaForm){
 }
 
 async function trataFormCadastroUsua(event) {
+    event.preventDefault();
+
     usuaMessageArea.textContent = '';
     usuaMessageArea.className = '';
 
@@ -30,7 +32,7 @@ async function trataFormCadastroUsua(event) {
     };
 
     try {
-        const resposta = await fetch("http://localhost:5000/", {
+        const resposta = await fetch("http://localhost:5000/usuario", {
             method: "POST",
             headers:{
                 'Content-Type': 'application/json'
