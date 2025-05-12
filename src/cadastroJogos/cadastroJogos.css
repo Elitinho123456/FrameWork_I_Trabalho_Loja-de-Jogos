@@ -1,38 +1,58 @@
 * {
-    margin: 0px;
-    color: #C5C3C0;
-    background-color: #1A2A3D;
-    font-family: sans-serif;
-}
-
-img {
-    border-radius: 55%;
-    background-color: #171D25;
-}
-
-a {
-    background-color: #171D25;
-}
-
-.botao_home {
-    border-radius: 35%;
-    cursor: pointer;
-    text-align: center;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    transition: all 0.3s ease;
-    align-items: center;
-    justify-content: center;
-    background-color: #171D25;
-    padding: 5px;
+    font-family: 'Motiva Sans', Arial, sans-serif;
+}
+
+body {
+    background-color: #1B2838;
+    color: #E9E9E9;
 }
 
 header {
-    height: 100px;
-    width: 100vw;
-    background-color: #171D25;
+    height: 104px;
+    width: 100%;
+    background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: transparent;
+}
+
+.botao_home {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.botao_home:hover {
+    transform: scale(1.1);
+}
+
+.botao_home img {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+}
+
+p {
+    color: #c7d5e0;
+    font-size: 24px;
+    font-weight: 300;
+    background: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .centro {
@@ -40,35 +60,73 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 104px);
+    padding: 20px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    padding: 20px;
-    background-color: #171D25;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: linear-gradient(135deg, #2a3f5a 0%, #1b2838 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid #3d5168;
 }
 
 form input {
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 15px;
+    padding: 12px 15px;
     border: none;
-    border-radius: 5px;
-    background-color: #22354A;
-    color: #C5C3C0;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #E9E9E9;
+    font-size: 14px;
+    border: 1px solid #3d5168;
+    transition: all 0.3s ease;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #66C0F4;
+    box-shadow: 0 0 5px rgba(102, 192, 244, 0.5);
+}
+
+form input::placeholder {
+    color: #8F98A0;
 }
 
 form input[type="submit"] {
-    background-color: #007BFF;
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 14px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
 }
 
 form input[type="submit"]:hover {
-    background-color: #0056b3;
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+}
+
+/* Steam-like title */
+.title {
+    color: #c7d5e0;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.svg {
+    box-shadow: #171a21;
 }

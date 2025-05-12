@@ -1,0 +1,38 @@
+body{
+    background-color: #22354A;
+}
+img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  header {
+    height: 100px;
+    width: 100vw;
+    background-color: #171D25;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+h1  {
+    
+    background-color: rebeccapurple;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  }
+  .box:hover {
+    animation-name: bounce;
+    animation-duration: 0.7s;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: bounce(0);
+    }
+    100% {
+      transform: bounce(360deg);
+    }
+  }
+     

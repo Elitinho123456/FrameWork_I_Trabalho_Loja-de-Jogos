@@ -4,37 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadasteo Jogos</title>
+    <title>Cadastro de Jogos</title>
     <link rel="stylesheet" href="cadastroJogos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="cadastroJogos.js"></script>
 </head>
 
 <body>
-
     <header>
-        <a href="../Home/index.html">
-            <button class="botao_home" type="button">
-                <img src="https://static.thenounproject.com/png/2137554-200.png" alt="HOME" 
-                    width="50px"
-                    height="50px">
-            </button>
-        </a>
+
+        <div class="cabecalho">
+
+            <a href="../Home/index.html">
+
+                <button class="botao_home" type="button">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="HOME" width="50px" height="50px">
+                </button>
+
+            </a>
+            <p>Cadastro de Jogos</p>
+        </div>
+
+        <img class="svg" src="../image/Frame 1.svg" alt="logo" width="80px" height="80px">
     </header>
 
     <div class="centro">
-
         <form onsubmit="event.preventDefault();enviaBancoJogos()">
-
-            <input type="text" name="nome" id="nome" placeholder="Nome">
-            <input type="text" name="nome" id="preco" placeholder="Preço">
-            <input type="text" name="nome" id="produtor" placeholder="Produtor">
-
-            <input type="submit" value="Enviar">
-
+            <div class="title">Adicionar Jogo</div>
+            <input type="text" name="nome" id="nome" placeholder="Nome do Jogo" required>
+            <input type="text" name="preco" id="preco" placeholder="Preço (R$)" required>
+            <input type="text" name="produtor" id="produtor" placeholder="Produtora" required>
+            <input type="submit" value="Cadastrar">
         </form>
-
     </div>
-
 </body>
 
 </html>

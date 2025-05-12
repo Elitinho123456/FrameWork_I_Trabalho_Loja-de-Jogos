@@ -1,42 +1,56 @@
 async function enviaBancoJogos() {
-    const idInput = document.getElementById('id');
+
     const idNome = document.getElementById('nome');
     const idPreco = document.getElementById('preco');
     const idProdutor = document.getElementById('produtor');
 
-    let id = idInput.value;
-    let nome = idNome.value;
-    let preco = idPreco.value;
-    let produtor = idProdutor.value;
+    let nome = idNome.value.trim();
+    let preco = idPreco.value.trim();
+    let produtor = idProdutor.value.trim();
 
+    if (!nome || !preco || !produtor) {
 
-    const obj = {
-
-        id,
-        nome,
-        preco,
-        produtor
+        alert('Por favor, preencha todos os campos!');
+        return;
 
     }
 
+    if (!preco.includes('R$')) {
+
+        preco = `${parseFloat(preco).toFixed(2)}`;
+
+    }
+
+    const obj = {
+        nome,
+        preco,
+        produtor
+    }
+
     try {
+
         const resposta = await fetch("http://localhost:5000/", {
+
             headers: {
                 'Content-Type': 'application/json'
             },
             method: "POST",
             body: JSON.stringify(obj)
-        }
-        );
+
+        });
 
         switch (resposta.status) {
 
             case 404:
-                alert('Algo deu errado! Jogo não adicionado a Biblioteca.');
+                alert('Erro: Jogo não adicionado à biblioteca.');
                 break;
 
             case 200:
-                alert('Jogo cadastrado com sucesso a Biblioteca.');
+                alert('Jogo cadastrado com sucesso!');
+                // Clear form
+                idNome.value = '';
+                idPreco.value = '';
+                idProdutor.value = '';
                 break;
 
             default:
@@ -44,9 +58,10 @@ async function enviaBancoJogos() {
                 break;
 
         }
-
     } catch (erro) {
-        console.log(erro)
-        alert("Erro");
+
+        console.error('Erro:', erro);
+        alert("Erro de conexão com o servidor.");
+
     }
-}
+};

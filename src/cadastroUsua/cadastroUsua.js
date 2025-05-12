@@ -30,7 +30,7 @@ async function trataFormCadastroUsua(event) {
     };
 
     try {
-        const resposta = await fetch("http://localhost:5000/usuario", {
+        const resposta = await fetch("http://localhost:5000/", {
             method: "POST",
             headers:{
                 'Content-Type': 'application/json'

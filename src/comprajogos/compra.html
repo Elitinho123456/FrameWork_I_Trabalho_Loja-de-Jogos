@@ -4,99 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra de jogos</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            margin: 0;
-        }
+    <link rel="stylesheet" href="comprajogos.css">
+    <script src="cadastroJogos.js"></script>
 
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #000000;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        aside {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            width: 325px;
-            height: calc(100% - 60px);
-            background-color: #f4f4f4;
-            border-right: 2px solid #ccc;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-        }
-
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            align-items: center;
-        }
-
-        .buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            width: 90%;
-        }
-
-        .buttons button:hover {
-            background-color: #0056b3;
-        }
-
-        form {
-            margin-top: 100px;
-            margin-left: 350px; 
-            width: 400px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid #000;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
 </head>
 <body>
-
     <header>Loja</header>
 
-    <aside>
-        <div class="buttons">
-            <button>Biblioteca</button>
-            <button>Lista de Jogos</button>
-        </div>
-    </aside>
-    <form onsubmit="event.preventDefault(); trataForm();">
-        <input type="text" id="nome" name="nome" placeholder="Nome do jogo">
-        <input type="text" name="nome" id="preco" placeholder="Preço">
-        <input type="text" name="nome" id="produtor" placeholder="Produtor">
-        <input type="submit" value="Comprar">
-    </form>
+    <div class="page-content">
+        <aside>
+            <div id="mainButtons" class="buttons">
+                <button onclick="showContent('lista')">Lista de Jogos</button>
+                <button onclick="showContent('biblioteca')">Biblioteca</button>
+            </div>
+
+            <div id="lista" class="content">
+                <button class="btn-voltar" onclick="hideContent()">Voltar</button>
+                <div class="content-inner">
+                     <h3>Lista de Jogos Disponíveis</h3>
+                     </div>
+            </div>
+
+            <div id="biblioteca" class="content">
+                <button class="btn-voltar" onclick="hideContent()">Voltar</button>
+                 <div class="content-inner">
+                    <h3>Sua Biblioteca de Jogos</h3>
+                    </div>
+            </div>
+        </aside>
+
+        <main>
+            <form id="compraForm" onsubmit="event.preventDefault(); trataForm();">
+                <h3>Informações do Jogo</h3>
+                <input type="text" id="nome" name="nome" placeholder="Nome do jogo">
+                <input type="text" id="preco" name="preco" placeholder="Preço (R$)">
+                <input type="text" id="produtor" name="produtor" placeholder="Produtor">
+                <input type="submit" value="Comprar">
+            </form>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
