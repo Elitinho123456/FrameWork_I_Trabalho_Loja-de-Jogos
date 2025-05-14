@@ -2,37 +2,60 @@ body{
     background-color: #22354A;
 }
 img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    background-color:#22354A;
+    position: relative;
+    top: 60%;
+    left: 70px;
+    height: 200px;
+    width: 200px;
     transform: translate(-50%, -50%);
+    border-radius: 100px;
+   
   }
   header {
-    height: 100px;
-    width: 100vw;
-    background-color: #171D25;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  background-color:#131f2c;
+    color:  #ffffff;
+    text-align: center;
+    padding: 20px;
 }
 h1  {
     
-    background-color: rebeccapurple;
-  border-radius: 10px;
+    background-color:#22354A;
+  border-radius: 30px;
+  width: 300px;
+  height: 70px;
+  padding: 10px;
+  text-align: center;
+    font-size: 36px;
+  }
+  a {
+    text-decoration: none;
+    color: #fff;
+    margin: 10px;
+}
+nav {
+    text-align: center;
+    padding: 10px;
+}
+
+
+*{
+    font-family: 'inter',sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+span{
+ background-color:#4c6581;
+  border-radius: 40px;
+font-size: 19px;
+  position: absolute; 
+  top: 200px;
+  left: 30px;
   width: 100px;
-  height: 100px;
-  }
-  .box:hover {
-    animation-name: bounce;
-    animation-duration: 0.7s;
-  }
+  height: 50px;
+  padding: 10px;
+  position: right;
+}
   
-  @keyframes bounce {
-    0% {
-      transform: bounce(0);
-    }
-    100% {
-      transform: bounce(360deg);
-    }
-  }
-     

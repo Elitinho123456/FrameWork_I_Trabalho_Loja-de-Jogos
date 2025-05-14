@@ -12,30 +12,35 @@
 <body>
 
     <header>
-        <a href="../Home/index.html" class="botao_home_link" aria-label="Voltar para a página inicial">
-            <img src="https://static.thenounproject.com/png/2137554-200.png" alt="Ícone Home" class="home_icon">
-            <span>Início</span>
-        </a>
+         <div class="cabecalho">
+
+            <a href="../Home/index.html">
+
+                <button class="botao_home" type="button">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="HOME" width="50px" height="50px">
+                </button>
+
+            </a>
+            <p>Criar Conta</p>
+            
+        </div>
+        <img class="svg" src="../image/Frame 1.svg" alt="logo" width="80px" height="80px">
     </header>
 
     <main class="container-principal">
-        <div class="formulario-container">
+        <div class="centro">
             <h2>Criar Nova Conta</h2>
             <form id="cadastro-usuario-form">
-                <div class="campo-formulario">
+               
                     <label for="nome">Nome Completo:</label>
                     <input type="text" name="nome" id="nome" placeholder="Seu nome completo" required>
-                </div>
-                
-                <div class="campo-formulario">
+           
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email" placeholder="seuemail@exemplo.com" required>
-                </div>
 
-                <div class="campo-formulario">
                     <label for="senha">Senha:</label>
                     <input type="password" name="senha" id="senha" placeholder="Pelo menos 6 caracteres" required>
-                </div>
+           
 
                 <button type="submit" class="botao-submit">Criar Conta</button>
             </form>

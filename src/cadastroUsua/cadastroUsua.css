@@ -1,227 +1,132 @@
-/* Importação da fonte (opcional, mas recomendado para consistência) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-/* Variáveis de Cor (CSS Custom Properties) com a sua paleta original */
-:root {
-    /* Cores principais do seu tema original */
-    --cor-fundo-principal: #1A2A3D;
-    --cor-texto-principal: #C5C3C0;
-
-    /* Cores para elementos do formulário, derivadas ou adaptadas */
-    --cor-fundo-container: #20354b; /* Um tom ligeiramente mais claro que o fundo principal para contraste sutil */
-    --cor-texto-label: #AEAEAE;    /* Um pouco mais suave que o texto principal para labels */
-    
-    --cor-input-texto: var(--cor-texto-principal);
-    --cor-input-fundo: #253c54; /* Fundo do input um pouco diferente do principal */
-    --cor-input-borda: #4A6572;
-    --cor-input-foco-borda: lightblue; /* Usando 'lightblue' como um tom de azul claro para foco */
-
-    /* Botão: Usaremos um cinza claro/azulado para o botão, já que não há um "primário" definido */
-    --cor-botao-primario: #5A7D9A; 
-    --cor-botao-primario-hover: #78909C;
-    --cor-botao-texto: #FFFFFF;
-
-    /* Cores de Sucesso (da sua paleta) */
-    --cor-sucesso-fundo: blue;
-    --cor-sucesso-texto: aliceblue;
-    --cor-sucesso-borda: var(--cor-texto-principal); /* #C5C3C0 */
-
-    /* Cores de Erro (da sua paleta, com ajuste no texto para legibilidade) */
-    --cor-erro-fundo: red;
-    --cor-erro-texto: aliceblue; /* AJUSTADO de 'black' para 'aliceblue' para melhor contraste com fundo 'red' */
-    --cor-erro-borda: rgb(39, 0, 0);
-
-    --sombra-container: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-/* Reset básico e Estilos Globais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Motiva Sans', Arial, sans-serif;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--cor-fundo-principal);
-    color: var(--cor-texto-principal);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding-top: 20px; /* Espaço para o header não sobrepor */
+    background-color: #1B2838;
+    color: #E9E9E9;
 }
 
 header {
+    height: 104px;
     width: 100%;
-    padding: 15px 30px;
-    background-color: var(--cor-fundo-container);
-    box-shadow: var(--sombra-container);
-    display: flex;
-    justify-content: flex-start;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.botao_home_link {
+    background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: var(--cor-texto-principal);
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.botao_home_link:hover,
-.botao_home_link:focus {
-    background-color: var(--cor-input-fundo); /* Reutilizando cor de input para hover */
-    outline: none;
-}
-
-.home_icon {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-    filter: brightness(0) invert(1); /* Mantém o ícone branco */
-}
-
-/* Container Principal */
-.container-principal {
+.cabecalho {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-grow: 1;
-    padding: 20px;
-    margin-top: 80px; 
+    gap: 15px;
+    background: transparent;
 }
 
-.formulario-container {
-    background-color: var(--cor-fundo-container);
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: var(--sombra-container);
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-}
-
-.formulario-container h2 {
-    color: var(--cor-texto-principal);
-    margin-bottom: 25px;
-    font-weight: 500;
-    font-size: 1.8em;
-}
-
-/* Estilos dos Campos do Formulário */
-.campo-formulario {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.campo-formulario label {
-    display: block;
-    color: var(--cor-texto-label);
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-size: 0.95em;
-}
-
-.campo-formulario input[type="text"],
-.campo-formulario input[type="email"],
-.campo-formulario input[type="password"] {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--cor-input-borda);
-    border-radius: 6px;
-    background-color: var(--cor-input-fundo);
-    color: var(--cor-input-texto);
-    font-size: 1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.campo-formulario input[type="text"]::placeholder,
-.campo-formulario input[type="email"]::placeholder,
-.campo-formulario input[type="password"]::placeholder {
-    color: var(--cor-texto-label);
-    opacity: 0.7;
-}
-
-.campo-formulario input[type="text"]:focus,
-.campo-formulario input[type="email"]:focus,
-.campo-formulario input[type="password"]:focus {
-    outline: none;
-    border-color: var(--cor-input-foco-borda);
-    box-shadow: 0 0 0 3px rgba(173, 216, 230, 0.3); /* Sombra de foco para lightblue */
-}
-
-/* Botão de Submit */
-.botao-submit {
-    width: 100%;
-    padding: 12px 20px;
-    background-color: var(--cor-botao-primario);
-    color: var(--cor-botao-texto);
+.botao_home {
+    background-color: transparent;
     border: none;
-    border-radius: 6px;
-    font-size: 1.1em;
-    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    transition: transform 0.2s ease;
+}
+
+.botao_home:hover {
+    transform: scale(1.1);
+}
+
+.botao_home img {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+}
+
+p {
+    color: #c7d5e0;
+    font-size: 24px;
+    font-weight: 300;
+    background: transparent;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
-.botao-submit:hover,
-.botao-submit:focus {
-    background-color: var(--cor-botao-primario-hover);
+.centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 104px);
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: linear-gradient(135deg, #2a3f5a 0%, #1b2838 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid #3d5168;
+}
+
+form input {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #E9E9E9;
+    font-size: 14px;
+    border: 1px solid #3d5168;
+    transition: all 0.3s ease;
+}
+
+form input:focus {
     outline: none;
+    border-color: #66C0F4;
+    box-shadow: 0 0 5px rgba(102, 192, 244, 0.5);
 }
 
-.botao-submit:active {
-    transform: scale(0.98);
+form input::placeholder {
+    color: #8F98A0;
 }
 
-/* Área de Mensagens (Sucesso/Erro) */
-.mensagem-area {
-    margin-top: 25px;
-    padding: 15px;
-    border-radius: 6px;
-    font-size: 0.95em;
+form button{
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 14px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+}
+
+/* Steam-like title */
+.title {
+    color: #c7d5e0;
+    font-size: 28px;
+    margin-bottom: 20px;
     text-align: center;
-    display: none; 
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.mensagem-area.success {
-    background-color: var(--cor-sucesso-fundo);
-    color: var(--cor-sucesso-texto);
-    border: 1px solid var(--cor-sucesso-borda);
-    display: block; 
-}
-
-.mensagem-area.error {
-    background-color: var(--cor-erro-fundo);
-    color: var(--cor-erro-texto); /* Texto ajustado para aliceblue */
-    border: 1px solid var(--cor-erro-borda);
-    display: block; 
-}
-
-/* Media Queries para Responsividade */
-@media (max-width: 600px) {
-    .formulario-container {
-        padding: 20px;
-        margin: 0 15px; 
-    }
-
-    .formulario-container h2 {
-        font-size: 1.5em;
-    }
-
-    .campo-formulario input[type="text"],
-    .campo-formulario input[type="email"],
-    .campo-formulario input[type="password"],
-    .botao-submit {
-        font-size: 0.95em;
-    }
+.svg {
+    box-shadow: #171a21;
 }

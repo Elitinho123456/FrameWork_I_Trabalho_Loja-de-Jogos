@@ -1,10 +1,13 @@
+/* Reset e estilos globais */
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #1b2838;
     color: #c7d5e0;
 }
 
+/* Header styles */
 header {
     position: fixed;
     top: 0;
@@ -22,16 +25,35 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+.btn-home {
+    position: absolute;
+    left: 20px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #53a9d8;
+    color: #1b2838;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #386a83;
+}
+
+/* Layout principal */
 .page-content {
     display: flex;
-    margin-top: 60px;
+    margin-top: 60px; /* Compensar a altura do header */
     height: calc(100vh - 60px);
     overflow: hidden;
 }
 
+/* Aside - Barra lateral */
 aside {
     width: 325px;
-    background-color: #233f56; /* Darkened from #2a475e */
+    background-color: #233f56;
     border-right: 2px solid #1b2838;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
@@ -39,25 +61,23 @@ aside {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
     overflow-y: auto;
-    position: relative;
+    height: 100%; /* Ocupa toda altura disponível */
 }
 
+/* Botões na sidebar */
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    align-items: center;
-    flex-grow: 1;
 }
 
 .buttons button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #53a9d8; /* Darkened from #66c0f4 */
+    background-color: #53a9d8;
     color: #1b2838;
     cursor: pointer;
     font-size: 16px;
@@ -67,39 +87,74 @@ aside {
 }
 
 .buttons button:hover {
-    background-color: #386a83; /* Darkened from #417a9b */
+    background-color: #386a83;
 }
 
+/* Área de conteúdo principal */
 main {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
     overflow-y: auto;
 }
 
+/* Painéis de conteúdo */
 .content {
+    display: none;
     width: 100%;
     height: 100%;
-    background-color: #1b2838;
-    border: 1px solid #233f56; /* Darkened from #2a475e */
+    background-color: #233f56;
+    border: 1px solid #1b2838;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     padding: 30px;
-    position: relative;
-    display: none;
     flex-direction: column;
     gap: 15px;
     box-sizing: border-box;
-    flex-grow: 1;
-    z-index: 1;
+    position: relative;
 }
 
+.content-inner {
+    margin-top: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-inner h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #c7d5e0;
+}
+
+/* Botão voltar */
+.btn-voltar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #53a9d8;
+    color: #1b2838;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #386a83;
+}
+
+/* Formulário */
 form {
     width: 80%;
     max-width: 500px;
-    background-color: #233f56; /* Darkened from #2a475e */
+    background-color: #233f56;
     border: 1px solid #1b2838;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -119,36 +174,17 @@ form input[type="text"] {
     color: #c7d5e0;
 }
 
-.content .btn-voltar {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 8px 15px;
+input[type="submit"] {
+    padding: 12px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
-    background-color: #53a9d8; /* Darkened from #66c0f4 */
+    background-color: #53a9d8;
     color: #1b2838;
     cursor: pointer;
-    font-size: 14px;
-    z-index: 2;
     transition: background-color 0.3s ease;
 }
 
-.content .btn-voltar:hover {
-    background-color: #386a83; /* Darkened from #417a9b */
-}
-
-.content-inner {
-    margin-top: 30px;
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-inner h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #c7d5e0;
+input[type="submit"]:hover {
+    background-color: #386a83;
 }

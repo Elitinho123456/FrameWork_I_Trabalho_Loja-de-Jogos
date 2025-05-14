@@ -5,35 +5,25 @@ const compraForm = document.getElementById('compraForm');
 
 // Função para mostrar a caixa de conteúdo (Lista ou Biblioteca) no aside
 function showContent(id) {
-    mainButtons.style.display = 'none'; // Esconde os botões principais
+    mainButtons.style.display = 'none';
     ['lista', 'biblioteca'].forEach(contentId => {
-        document.getElementById(contentId).style.display = 'none'; // Esconde todas as divs de conteúdo
+        document.getElementById(contentId).style.display = 'none';
     });
-    document.getElementById(id).style.display = 'flex'; // Mostra a div de conteúdo selecionada
-    // O formulário de compra permanece visível por padrão em 'main'
+    document.getElementById(id).style.display = 'flex';
 }
 
-// Função para esconder as caixas de conteúdo no aside e mostrar os botões principais
-function hideContentAndShowMain() {
+// Função para esconder as caixas de conteúdo no aside e mostrar os botões (aside)
+function hideContent() {
     ['lista', 'biblioteca'].forEach(contentId => {
-        document.getElementById(contentId).style.display = 'none'; // Esconde as divs de conteúdo
+        document.getElementById(contentId).style.display = 'none';
     });
-    mainButtons.style.display = 'flex'; // Mostra os botões principais
-    // O formulário de compra permanece visível por padrão em 'main'
+    mainButtons.style.display = 'flex';
 }
 
-// Função para o botão "Voltar" do cabeçalho, retorna ao estado principal
-function showMainContent() {
-    hideContentAndShowMain(); // Garante que a aside esteja no estado principal (botões visíveis)
-    compraForm.style.display = 'flex'; // Garante que o formulário de compra esteja visível
-}
-
-// Inicializa a página exibindo o formulário e os botões principais na aside
+// Inicializa a página exibindo o formulário e os botões principais
 document.addEventListener('DOMContentLoaded', () => {
-    hideContentAndShowMain(); // Define o estado inicial: mostra os botões principais na aside e esconde as divs de conteúdo
-    compraForm.style.display = 'flex'; // Garante que o formulário de compra esteja visível no início
-
-    // Removidos os event listeners redundantes, pois os atributos onclick são usados no HTML
+    hideContent(); // Garante que apenas os botões principais são mostrados inicialmente
+    compraForm.style.display = 'flex';
 });
 
 // Função assíncrona para tratar o formulário e enviar os dados para o servidor
@@ -42,14 +32,12 @@ async function trataForm() {
     const preco = document.getElementById("preco").value;
     const produtor = document.getElementById("produtor").value;
 
-    const objCompra = { nome, preco, produtor };
-
+    const objCompra = { nome, preco, produtor }; // Note que não inclui o id
+    
     try {
         const resposta = await fetch("http://localhost:5000/compra", {
-            headers: {
-                'Content-Type': 'application/json'
-            },
             method: "POST",
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(objCompra)
         });
 

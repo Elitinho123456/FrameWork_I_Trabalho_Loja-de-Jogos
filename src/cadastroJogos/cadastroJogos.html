@@ -29,11 +29,11 @@
     </header>
 
     <div class="centro">
-        <form onsubmit="event.preventDefault();enviaBancoJogos()">
-            <div class="title">Adicionar Jogo</div>
-            <input type="text" name="nome" id="nome" placeholder="Nome do Jogo" required>
-            <input type="text" name="preco" id="preco" placeholder="Preço (R$)" required>
-            <input type="text" name="produtor" id="produtor" placeholder="Produtora" required>
+        <form id="formJogo">
+            <h1 class="title">Cadastrar Jogo</h1>
+            <input type="text" id="nome" placeholder="Nome do Jogo" required>
+            <input type="text" id="preco" placeholder="Preço (R$)" required>
+            <input type="text" id="produtor" placeholder="Produtor" required>
             <input type="submit" value="Cadastrar">
         </form>
     </div>

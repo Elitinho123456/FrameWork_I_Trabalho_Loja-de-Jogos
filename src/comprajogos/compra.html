@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra de jogos</title>
-    <link rel="stylesheet" href="comprajogos.css">
-    <script src="cadastroJogos.js"></script>
-
+    <link rel="stylesheet" href="compra.css">
 </head>
 <body>
-    <header>Loja</header>
-
+    <header>  <button class="btn-home" onclick="window.location.href='index.html'">Home</button>
+        Loja
+    </header>
     <div class="page-content">
         <aside>
             <div id="mainButtons" class="buttons">
@@ -21,15 +20,17 @@
             <div id="lista" class="content">
                 <button class="btn-voltar" onclick="hideContent()">Voltar</button>
                 <div class="content-inner">
-                     <h3>Lista de Jogos Disponíveis</h3>
-                     </div>
+                    <h3>Lista de Jogos Disponíveis</h3>
+                    <!-- Conteúdo da lista de jogos pode ser adicionado aqui -->
+                </div>
             </div>
 
             <div id="biblioteca" class="content">
                 <button class="btn-voltar" onclick="hideContent()">Voltar</button>
-                 <div class="content-inner">
+                <div class="content-inner">
                     <h3>Sua Biblioteca de Jogos</h3>
-                    </div>
+                    <!-- Conteúdo da biblioteca pode ser adicionado aqui -->
+                </div>
             </div>
         </aside>
 
@@ -37,14 +38,13 @@
             <form id="compraForm" onsubmit="event.preventDefault(); trataForm();">
                 <h3>Informações do Jogo</h3>
                 <input type="text" id="nome" name="nome" placeholder="Nome do jogo">
-                <input type="text" id="preco" name="preco" placeholder="Preço (R$)">
+                <input type="text" id="preco" name="preco" placeholder="Preço">
                 <input type="text" id="produtor" name="produtor" placeholder="Produtor">
                 <input type="submit" value="Comprar">
             </form>
         </main>
     </div>
 
-    <script src="script.js"></script>
-
+    <script src="compra.js"></script>
 </body>
 </html>

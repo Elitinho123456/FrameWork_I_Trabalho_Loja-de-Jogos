@@ -1,219 +1,205 @@
-import mysql, { Connection, ConnectionOptions, QueryError } from 'mysql2/promise';
+import mysql, { Connection } from 'mysql2/promise';
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
-
+//biblioteca importada para os token
+import jwt from 'jsonwebtoken';
 
 const app = fastify();
 app.register(cors);
 
+
+const getConnection = () =>
+  mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'framework',
+    port: 3306,
+  });
+
 app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
+  try {
+    const conn = await getConnection();
 
-    try {
+    console.log('Login efetuado no banco de dados MySQL');
 
-        const conn = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'framework',
-            port: 3306
-        });
+    const [resultadoCompra] = await conn.query('SELECT * FROM compra');
+    const [resultadoUsuario] = await conn.query('SELECT * FROM usuario');
 
-        console.log('Login efetuado em um Database SQL');
+    await conn.end();
 
-        const [resultado, Tabela] = await conn.query('SELECT * FROM compra');
-        reply.send(resultado);
-
-
-        await conn.end();
-
-    } catch (erro: any) {
-
-        switch (erro.code) {
-
-            case 'ER_NO_SUCH_TABLE':
-
-                console.log("Tabela Desconhecida.");
-                reply.send('ERRO: Tabela Desconhecida')
-                break;
-
-            case 'ER_PARSE_ERROR':
-
-                console.log("Erro de sintaxe SQL");
-                reply.send("ERRO: Erro de sintaxe SQL")
-                break;
-
-            case 'ECONNREFUSED':
-                console.log(`Ouve um erro ao se conectar com o servidor: ${erro}`)
-
-                console.log('Inicie o Laragon')
-                reply.send("ERRO: Inicie o Laragon")
-                break;
-
-            case 'ER_BAD_DB_ERROR':
-                console.log(`Ouve um erro ao se conectar com o servidor: ${erro}`)
-
-                console.log("Erro, nome do Banco de Dados incorreto")
-                reply.send("ERRO, nome do Banco de Dados incorreto")
-                break;
-
-            case 'ER_ACCESS_DENIED_ERROR':
-                console.log(`Ouve um erro ao se conectar com o servidor: ${erro}`)
-
-                console.log('Erro no Login!')
-                reply.send("ERRO: Login MySql")
-                break;
-
-            default:
-                console.log(`Ouve um erro: ${erro}`)
-
-                console.log('Erro indefinido');
-                reply.send("ERRO: Indefinido")
-                break;
-        }
-    };
-
+    reply.send({ compras: resultadoCompra, usuarios: resultadoUsuario });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  }
 });
 
-    
-    app.post("/compra", async (request: FastifyRequest, reply: FastifyReply) => {
-        const { id, nome ,preco,produtor } = request.body as any
-        try {
-            const conn = await mysql.createConnection({
-                host: 'localhost',
-                user: 'root',
-                password: '',
-                database: 'framework',
-                port: 3306
-            });
-            const [existing] = await conn.query("SELECT id FROM compra WHERE id = ?", [id]);
-            if ((existing as any[]).length > 0) {
-                reply.status(400).send({ mensagem: "ERRO : esse id ja possui um jogo" });
-                return;
-            }
-            const resultado = await conn.query("INSERT INTO estudantes (id,nome,preco,produtor) VALUES (?,?,?,?)", [id, nome, preco, produtor]);
-            const [dados, estruturaTabela] = resultado;
-            reply.status(200).send(dados);
-            }
-            
-
-        
-        catch (erro:any) {
-    
-            if (erro.code === "ECONNREFUSED") {
-                console.log("ERRO: LIGUE O LARAGON")
-                reply.status(400).send({ mensagem: "ERRO: LIGUE O LARAGON" })
-            } else if (erro.code === "ER_BAD_DB_ERROR") {
-                console.log("ERRO: CONFIRA O NOME DO BANCO DE DADOS OU CRIE UM NOVO BANCO COM O NOME QUE VOCÊ COLOCOU LÁ NA CONEXÃO")
-                reply.status(400).send({ mensagem: "ERRO: CONFIRA O NOME DO BANCO DE DADOS OU CRIE UM NOVO BANCO COM O NOME QUE VOCÊ COLOCOU LÁ NA CONEXÃO" })
-            } else if (erro.code === "ER_ACCESS_DENIED_ERROR") {
-                console.log("ERRO: CONFIRA O USUÁRIO E SENHA NA CONEXÃO")
-                reply.status(400).send({ mensagem: "ERRO: CONFIRA O USUÁRIO E SENHA NA CONEXÃO" })
-            } else {
-                console.log(erro)
-                reply.status(400).send({ mensagem: "ERRO DESCONHECIDO OLHE O TERMINAL" })
-            }
-        }
-    });
-
-
-//Fernando - Marcação para lembrar de apresentar essa parte se for preciso...
-app.post('/usuario', async (request: FastifyRequest, reply:FastifyReply)=>{
-
-    interface usuaRequestBody{
-        nome?: string;
-        email?: string;
-        senha?: string;
-    }
-
-    const {nome, email, senha} = request.body as usuaRequestBody;
-
-    if (!nome || !email || !senha) {
-        reply.status(400).send({mensagem: "Nome, email e senha são obrigatorios"});
-        return;
-    }
-
-    let conn: Connection | null = null;
-    
-    try{
-        conn = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'framework',
-            port: 3306
+app.post('/compra', async (request: FastifyRequest, reply: FastifyReply) => {
+    const { nome, preco, produtor } = request.body as {
+      nome: string;
+      preco: number;
+      produtor: string;
+    };
+  
+    try {
+      const conn = await getConnection();
+  
+      // Verifica se o jogo já existe pelo nome (ao invés do ID)
+      const [existing] = await conn.query(
+        'SELECT nome FROM compra WHERE nome = ?', 
+        [nome]
+      );
+  
+      if ((existing as any[]).length > 0) {
+        await conn.end();
+        return reply.status(400).send({ 
+          mensagem: 'Erro: Jogo com este nome já foi comprado.' 
         });
-
-        const [emailJaExiste] = await conn.query('select id from usuario where email = ?', [email]);
-
-        if ((emailJaExiste as any[]).length > 0) {
-            reply.status(409).send({mensagem: "Email já está cadastrado."});
-            await conn.end();
-            return;
-        }
-
-        const [resultado] = await conn.query(
-            "insert into usuario (nome, email, senha) values (?,?,?)",
-            [nome, email, senha]
-        );
-
-        const insertResult = resultado as any;
-        if (insertResult.affectedRows > 0) {
-            console.log(`Usuário '${email}' criado com id: ${insertResult.insertId} na tabela 'usuario'.` );
-            reply.status(201).send({
-                mensagem: 'Usuário cadastrado com sucesso',
-                usuaId: insertResult.insertId
-            });
-        }else {
-            console.warn('Nenhuma linha afetada ao tentar criar usuário na tabela \'usuario\'.');
-            reply.status(500).send({mensagem:'Falha ao criar usuário, nenhuma linha afetada.'});
-        }
-
-
-    }catch (erro:any){
-        console.error(`Erro ao cadastrar usuário '${email}': ${erro.message}`);
-
-
-        if (erro.code) {
-            switch (erro.code) {
-                case 'ER_DUP_ENTRY':
-                    reply.status(409).send({mensagem: 'Violção de constraint única (não relacionada ao email.'});
-                    break;
-                case 'ECONNREFUSED':
-                    console.error('Falha ao conectar ao banco: ECONNREFUSED.');
-                    reply.status(503).send({ mensagem: 'Serviço indisponível. Tente novamente mais tarde.' });
-                    break;
-                case 'ER_BAD_DB_ERROR':
-                    console.error(`Erro de banco de dados inválido: ${erro.message}.`);
-                    reply.status(500).send({ mensagem: 'Erro de configuração do banco de dados.' });
-                    break;
-                case 'ER_ACCESS_DENIED_ERROR':
-                    console.error(`Acesso negado ao banco de dados: ${erro.message}.`);
-                    reply.status(500).send({ mensagem: 'Erro de autenticação com o banco de dados.' });
-                    break;
-                case 'ER_NO_SUCH_TABLE':
-                     console.error(`A tabela não foi encontrada: ${erro.message}`); // Log mais específico
-                     reply.status(500).send({ mensagem: 'Erro: Tabela de dados não encontrada.' }); // Mensagem para o usuário
-                     break;
-                default:
-                    reply.status(500).send({ mensagem: 'Erro no banco de dados ao processar sua solicitação.' });
-            }
-        }else{
-            reply.status(500).send({mensagem: 'Erro no banco de dados ao processar a solicitação.'});
-        }
-    } finally {
-        if(conn){
-            await conn.end();
-        }
+      }
+  
+      // Insere sem especificar o ID (usando auto-incremento)
+      const [resultado] = await conn.query(
+        'INSERT INTO compra (nome, preco, produtor) VALUES (?, ?, ?)',
+        [nome, preco, produtor]
+      );
+  
+      await conn.end();
+      reply.status(201).send({ 
+        mensagem: 'Compra cadastrada com sucesso.', 
+        dados: resultado 
+      });
+    } catch (erro: any) {
+      handleDatabaseError(erro, reply);
     }
-})
+  });
+
+app.post('/usuario', async (request: FastifyRequest, reply: FastifyReply) => {
+  const { nome, email, senha } = request.body as {
+    nome?: string;
+    email?: string;
+    senha?: string;
+  };
+
+  if (!nome || !email || !senha) {
+    return reply.status(400).send({ mensagem: 'Nome, email e senha são obrigatórios.' });
+  }
+
+  let conn: Connection | null = null;
+
+  try {
+    conn = await getConnection();
+
+    const [emailJaExiste] = await conn.query('SELECT id FROM usuario WHERE email = ?', [email]);
+
+    if ((emailJaExiste as any[]).length > 0) {
+      await conn.end();
+      return reply.status(409).send({ mensagem: 'Email já está cadastrado.' });
+    }
+
+    const [resultado]: any = await conn.query(
+      'INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)',
+      [nome, email, senha]
+    );
+
+    reply.status(201).send({
+      mensagem: 'Usuário cadastrado com sucesso',
+      usuaId: resultado.insertId,
+    });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  } finally {
+    if (conn) await conn.end();
+  }
+});
+
+app.post('/jogos', async (request: FastifyRequest, reply: FastifyReply) => {
+  const { nome, preco, produtor } = request.body as {
+    nome?: string;
+    preco?: string;
+    produtor?: string;
+  };
+
+  // Validação dos campos obrigatórios
+  if (!nome || !preco || !produtor) {
+    return reply.status(400).send({ mensagem: 'Nome, preço e produtor são obrigatórios.' });
+  }
+
+  // Validação do formato do preço
+  const precoNumerico = parseFloat(preco);
+  if (isNaN(precoNumerico)) {
+    return reply.status(400).send({ mensagem: 'O preço deve ser um valor numérico.' });
+  }
+
+  let conn: Connection | null = null;
+
+  try {
+    conn = await getConnection();
+
+    // Verifica se o jogo já existe (opcional)
+    const [jogoExistente] = await conn.query(
+      'SELECT id FROM jogos WHERE nome = ? AND produtor = ?',
+      [nome, produtor]
+    );
+
+    if ((jogoExistente as any[]).length > 0) {
+      return reply.status(409).send({ mensagem: 'Jogo já cadastrado na biblioteca.' });
+    }
+
+    // Insere o novo jogo
+    const [resultado]: any = await conn.query(
+      'INSERT INTO jogos (nome, preco, produtor) VALUES (?, ?, ?)',
+      [nome, precoNumerico, produtor]
+    );
+
+    reply.status(201).send({
+      mensagem: 'Jogo cadastrado com sucesso',
+      jogoId: resultado.insertId,
+    });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  } finally {
+    if (conn) await conn.end();
+  }
+});
+
+function handleDatabaseError(error: any, reply: FastifyReply) {
+  const logPrefix = 'Erro no banco de dados:';
+
+  switch (error.code) {
+    case 'ER_NO_SUCH_TABLE':
+      console.error(`${logPrefix} Tabela não encontrada.`);
+      reply.status(500).send({ mensagem: 'Tabela não encontrada.' });
+      break;
+    case 'ER_PARSE_ERROR':
+      console.error(`${logPrefix} Erro de sintaxe SQL.`);
+      reply.status(500).send({ mensagem: 'Erro de sintaxe SQL.' });
+      break;
+    case 'ECONNREFUSED':
+      console.error(`${logPrefix} Conexão recusada. Verifique se o MySQL/Laragon está em execução.`);
+      reply.status(503).send({ mensagem: 'Serviço indisponível. Verifique a conexão com o banco.' });
+      break;
+    case 'ER_BAD_DB_ERROR':
+      console.error(`${logPrefix} Banco de dados não existe.`);
+      reply.status(500).send({ mensagem: 'Nome do banco de dados incorreto.' });
+      break;
+    case 'ER_ACCESS_DENIED_ERROR':
+      console.error(`${logPrefix} Usuário ou senha inválidos.`);
+      reply.status(401).send({ mensagem: 'Usuário ou senha do banco inválidos.' });
+      break;
+    case 'ER_DUP_ENTRY':
+      console.error(`${logPrefix} Duplicidade de dados.`);
+      reply.status(409).send({ mensagem: 'Dados duplicados.' });
+      break;
+    default:
+      console.error(`${logPrefix} ${error.message || error}`);
+      reply.status(500).send({ mensagem: 'Erro interno no servidor.' });
+  }
+}
 
 app.listen({ port: 5000 }, (erro, address) => {
-    switch (erro) {
-        case null:
-            console.log(`Fastify iniciado ${address}`);
-            break;
-        default:
-            console.log('ERRO: FASTIFY was not inicialized');
-            break;
-    }
+  if (erro) {
+    console.log('Erro: Fastify não foi iniciado', erro);
+  } else {
+    console.log(`Fastify iniciado em ${address}`);
+  }
 });
