@@ -111,7 +111,7 @@ form button{
     transition: all 0.3s ease;
 }
 
-form input[type="submit"]:hover {
+form button:hover {
     background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
     box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
 }

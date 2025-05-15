@@ -1,0 +1,163 @@
+:root {
+    --steam-primary: #1b2838;
+    --steam-secondary: #2a475e;
+    --steam-accent: #66c0f4;
+    --steam-text: #c6d4df;
+    --steam-border: #67c1f5;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--steam-primary);
+    color: var(--steam-text);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--steam-secondary);
+    border-radius: 4px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: grid;
+    gap: 10px;
+}
+
+.steam-input {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--steam-border);
+    border-radius: 3px;
+    color: var(--steam-text);
+}
+
+.steam-button {
+    background: linear-gradient(to bottom, #a4d007, #536904);
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    color: #d2e885;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.steam-button:hover {
+    transform: translateY(-1px);
+}
+
+.clientes-list {
+    background: var(--steam-secondary);
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.cliente-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.cliente-info {
+    display: flex;
+    gap: 15px;
+}
+
+.cliente-id {
+    color: var(--steam-accent);
+}
+
+:root {
+    --steam-primary: #1b2838;
+    --steam-secondary: #2a475e;
+    --steam-accent: #66c0f4;
+    --steam-text: #c6d4df;
+    --steam-border: #67c1f5;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--steam-primary);
+    color: var(--steam-text);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--steam-secondary);
+    border-radius: 4px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: grid;
+    gap: 10px;
+}
+
+.steam-input {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--steam-border);
+    border-radius: 3px;
+    color: var(--steam-text);
+}
+
+.steam-button {
+    background: linear-gradient(to bottom, #a4d007, #536904);
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    color: #d2e885;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.steam-button:hover {
+    transform: translateY(-1px);
+}
+
+.clientes-list {
+    background: var(--steam-secondary);
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.cliente-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.cliente-info {
+    display: flex;
+    gap: 15px;
+}
+
+.cliente-id {
+    color: var(--steam-accent);
+}

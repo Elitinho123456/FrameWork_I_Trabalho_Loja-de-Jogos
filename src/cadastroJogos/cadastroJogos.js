@@ -1,18 +1,44 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('formJogo');
-    
+
     if (form) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             enviaBancoJogos();
         });
     } else {
         console.error('Formulário não encontrado! Verifique o ID do formulário.');
     }
+
+    const botaoMenu = document.querySelector('.botao_menu');
+    const menuOpcoes = document.querySelector('.menu-opcoes');
+
+
+    if (botaoMenu && menuOpcoes) {
+        botaoMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (menuOpcoes.style.display === 'flex') {
+                menuOpcoes.style.display = 'none';
+            } else {
+                menuOpcoes.style.display = 'flex';
+            }
+        });
+
+        document.addEventListener('click', function() {
+            menuOpcoes.style.display = 'none';
+        });
+
+        menuOpcoes.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    } else {
+        console.warn('Elementos do menu não encontrados. A funcionalidade do menu pode não funcionar.');
+    }
+
 });
 
 async function enviaBancoJogos() {
-    const form = document.getElementById('formJogo'); // Adicionado
+    const form = document.getElementById('formJogo');
     const idNome = document.getElementById('nome');
     const idPreco = document.getElementById('preco');
     const idProdutor = document.getElementById('produtor');

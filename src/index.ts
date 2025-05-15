@@ -112,6 +112,20 @@ app.post('/usuario', async (request: FastifyRequest, reply: FastifyReply) => {
   }
 });
 
+// Adicione esta nova rota após as outras rotas POST
+app.get('/usuarios', async (request: FastifyRequest, reply: FastifyReply) => {
+  let conn: Connection | null = null;
+  try {
+    conn = await getConnection();
+    const [usuarios] = await conn.query('SELECT id, nome, email FROM usuario');
+    reply.send({ usuarios });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  } finally {
+    if (conn) await conn.end();
+  }
+});
+
 app.post('/jogos', async (request: FastifyRequest, reply: FastifyReply) => {
   const { nome, preco, produtor } = request.body as {
     nome?: string;

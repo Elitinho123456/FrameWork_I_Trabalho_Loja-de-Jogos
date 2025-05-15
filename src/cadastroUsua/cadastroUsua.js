@@ -5,7 +5,7 @@ const emailImput = document.getElementById('email');
 const nomeImput = document.getElementById('nome');
 const senhaImput = document.getElementById('senha');
 
-//adicione o listener no formulario
+//adiciona o listener no formulario
 
 if(usuaForm){
     usuaForm.addEventListener('submit', trataFormCadastroUsua);
