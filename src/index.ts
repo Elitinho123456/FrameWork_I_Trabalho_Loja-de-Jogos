@@ -210,6 +210,21 @@ function handleDatabaseError(error: any, reply: FastifyReply) {
   }
 }
 
+// Nova rota para listar os jogos
+app.get('/jogos', async (request: FastifyRequest, reply: FastifyReply) => {
+  let conn: Connection | null = null;
+  try {
+    conn = await getConnection();
+    // Seleciona todos os campos da tabela 'jogos'
+    const [jogos] = await conn.query('SELECT id, nome, preco, produtor FROM jogos');
+    reply.send({ jogos });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  } finally {
+    if (conn) await conn.end();
+  }
+});
+
 app.listen({ port: 5000 }, (erro, address) => {
   if (erro) {
     console.log('Erro: Fastify não foi iniciado', erro);

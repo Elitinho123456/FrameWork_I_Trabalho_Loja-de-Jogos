@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
-    <title></title>
+    <title>Sua Lista de Jogos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
-
 <body>
 
-    <header>
-        <span class="material-symbols-outlined">
-
-        </span>
-        <h1>Sua Lista</h1>
-
-        <nav>
-            <a href="../cadastroUsua/cadastroUsua.html">
-                <img src="https://cdn-icons-png.flaticon.com/512/3364/3364044.png">
-            </a>
-        </nav>
-
-        <a href="../comprajogos/compra.html">
-            <p class="gradient">compra</p>
-        </a>
-        <a href="../cadastroJogos/cadastroJogos.html">
-            <p class="gradient">cadastro jogos</p>
-        </a>
-        <a href="../Home/ListaCliente.html">
-            <p class="gradient">listagem dos clientes</p>
-        </a>
-
+    <header class="cabecalho-pagina"> 
+        <div class="container cabecalho-conteudo"> 
+            <div class="area-logo"> 
+                <h1>Minha Loja de Jogos</h1>
+            </div>
+            <nav class="AHA"> 
+                <a href="../comprajogos/compra.html">Loja</a>
+                <a href="../cadastroJogos/cadastroJogos.html">Cadastrar Jogo</a>
+                <a href="../Home/ListaCliente.html">Clientes</a>
+                <a href="../cadastroUsua/cadastroUsua.html" class="link-usuario" title="Minha Conta">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Minha Conta</span>
+                </a>
+            </nav>
+        </div>
     </header>
 
-</body>
+    <main class="AATA container">
+        <h2 class="titulo-secao">Lista de jogos</h2> 
+        <div id="lista-jogos-container" class="grade-jogos"> 
+            </div>
+    </main>
 
+    <script src="lista.js"></script>
+</body>
 </html>

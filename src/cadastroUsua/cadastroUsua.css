@@ -1,15 +1,20 @@
+/* cadastroUsua.css - Estilo baseado no cadastroJogos.css */
+
+/* Reset e Fontes Globais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Motiva Sans', Arial, sans-serif;
+    font-family: 'Montserrat', 'Motiva Sans', Arial, sans-serif; /* Priorizando Montserrat */
 }
 
 body {
     background-color: #1B2838;
     color: #E9E9E9;
+    line-height: 1.6; /* Adicionado para melhor espaçamento de texto geral */
 }
 
+/* Estilos do Cabeçalho */
 header {
     height: 104px;
     width: 100%;
@@ -17,58 +22,209 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .cabecalho {
     display: flex;
     align-items: center;
-    gap: 15px;
-    background: transparent;
+    gap: 20px;
+    background: transparent; /* Importante para não sobrescrever o gradiente do header */
 }
 
-.botao_home {
-    background-color: transparent;
+/* Estilo para o link 'Início' no header - Adaptado de .botao_home e .botao_menu */
+.botao_home_link_estilizado {
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
+    padding: 10px; /* Ajustado */
+    min-width: 80px; /* Largura mínima similar aos botões do menu */
+    height: 50px; /* Altura ajustada */
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza conteúdo do botão */
+    color: white;
+    font-size: 14px; /* Tamanho da fonte do texto */
 }
 
-.botao_home:hover {
-    transform: scale(1.1);
+.botao_home_link_estilizado:hover {
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+    transform: scale(1.05);
 }
 
-.botao_home img {
-    width: 40px;
-    height: 40px;
+.home_icon_estilizado {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
     background-color: transparent;
     filter: brightness(0) invert(1);
 }
 
-p {
+.botao_home_link_estilizado span {
+    background-color: transparent; /* Garante que o span não tenha fundo próprio */
+}
+
+/* Título no Cabeçalho (pode ser o <p> ou um <h1>/<h2> se preferir semanticamente) */
+.titulo-cabecalho { /* Usando a classe que definimos no HTML */
     color: #c7d5e0;
     font-size: 24px;
     font-weight: 300;
-    background: transparent;
+    background: transparent; /* Importante */
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+.logo {
+    width: 80px; /* Mantendo o tamanho do logo do cadastroJogos */
+    height: auto; /* Para manter proporção caso a imagem seja diferente */
+    border-radius: 50%; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
+}
+
+.logo:hover {
+    animation: pulse 2s infinite alternate, rotate 4s infinite linear, hoverEffect 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(102, 192, 244, 0.9));
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(7, 143, 221, 0.3) 0%, transparent 70%);
+    animation: particles 4s infinite linear;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover::after {
+    opacity: 1;
+}
+
+/* Estilos para o Menu Dropdown (copiados do cadastroJogos.css) */
+.menu-container {
+    position: relative;
+    display: inline-block; /* Ou flex, dependendo de como está no .cabecalho */
+    background: transparent;
+}
+
+.botao_menu {
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
+    width: 70px; /* Ajustado para caber melhor */
+    height: 50px; /* Ajustado */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao_menu:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+}
+
+.botao_menu img {
+    width: 30px; /* Ajustado */
+    height: 30px; /* Ajustado */
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+}
+
+.menu-opcoes {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(135deg, #2a3f5a 0%, #1b2838 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid #3d5168;
+    width: 200px;
+    z-index: 100;
+    display: none; /* Começa escondido */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.menu-container:hover .menu-opcoes { /* Mostrar no hover */
+    display: flex;
+    animation: fadeIn 0.3s ease-in-out; /* Keyframe 'fadeIn' precisa ser definido */
+}
+
+.opcao-menu {
+    padding: 15px 20px;
+    color: #c7d5e0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #3d5168;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    background: transparent; /* Importante */
+}
+.opcao-menu span {
+    background: transparent;
+}
+
+.opcao-menu:last-child {
+    border-bottom: none;
+}
+
+.opcao-menu:hover {
+    background-color: rgba(102, 192, 244, 0.1);
+    color: #66C0F4;
+    padding-left: 25px;
+}
+
+.menu-icone {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    filter: brightness(0) invert(1) opacity(0.8);
+    transition: all 0.3s ease;
+    background: transparent; /* Importante */
+}
+
+.opcao-menu:hover .menu-icone {
+    filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(102, 192, 244, 0.8));
+    transform: scale(1.1);
+}
+
+/* Conteúdo Principal (Formulário) */
 .centro {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 104px);
+    min-height: 100vh; /* Para centralizar verticalmente se o conteúdo for pequeno */
     padding: 20px;
+    padding-top: 124px; /* Altura do header (104px) + um respiro (20px) */
 }
 
-form {
+form#cadastro-usuario-form { /* Estilo do form do cadastroJogos.css */
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* Mesma largura do form de jogos */
     padding: 30px;
     background: linear-gradient(135deg, #2a3f5a 0%, #1b2838 100%);
     border-radius: 4px;
@@ -76,7 +232,32 @@ form {
     border: 1px solid #3d5168;
 }
 
-form input {
+.title { /* Título dentro do formulário */
+    color: #c7d5e0;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: transparent; /* Para não ter o fundo do form */
+}
+
+/* Estilo para Labels (se você decidir usá-las visivelmente) */
+form#cadastro-usuario-form label {
+    display: block; /* Faz o label ocupar a linha toda */
+    color: #b0bec5; /* Um cinza claro para as labels */
+    font-size: 14px;
+    margin-bottom: 5px; /* Espaço entre o label e o input */
+    text-align: left;
+    background: transparent; /* Para não ter o fundo do form */
+    font-weight: 400;
+}
+
+/* Estilo para Inputs (copiado do cadastroJogos.css) */
+form#cadastro-usuario-form input[type="text"],
+form#cadastro-usuario-form input[type="email"],
+form#cadastro-usuario-form input[type="password"] {
     margin-bottom: 15px;
     padding: 12px 15px;
     border: none;
@@ -86,19 +267,20 @@ form input {
     font-size: 14px;
     border: 1px solid #3d5168;
     transition: all 0.3s ease;
+    width: 100%; /* Garante que o input ocupe o espaço */
 }
 
-form input:focus {
+form#cadastro-usuario-form input:focus { /* Para todos os inputs de texto, email, password */
     outline: none;
     border-color: #66C0F4;
     box-shadow: 0 0 5px rgba(102, 192, 244, 0.5);
 }
 
-form input::placeholder {
+form#cadastro-usuario-form input::placeholder {
     color: #8F98A0;
 }
 
-form button{
+form#cadastro-usuario-form input[type="submit"] {
     background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
     color: white;
     cursor: pointer;
@@ -107,26 +289,128 @@ form button{
     letter-spacing: 1px;
     border: none;
     padding: 14px;
-    margin-top: 10px;
+    margin-top: 10px; /* Espaço acima do botão */
     transition: all 0.3s ease;
+    border-radius: 3px; /* Adicionado para consistência */
+    font-size: 15px; /* Adicionado para consistência */
 }
 
-form button:hover {
+form#cadastro-usuario-form input[type="submit"]:hover {
     background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
     box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
 }
 
-/* Steam-like title */
-.title {
-    color: #c7d5e0;
-    font-size: 28px;
-    margin-bottom: 20px;
+/* Área de Mensagens (Sucesso/Erro) - Estilo adaptado */
+.mensagem-feedback {
+    width: 100%;
+    max-width: 400px; /* Mesma largura do formulário */
+    margin: 20px auto 0 auto;
+    padding: 12px 15px; /* Similar aos inputs */
+    border-radius: 3px; /* Similar aos inputs */
+    font-size: 14px;    /* Similar aos inputs */
     text-align: center;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    display: none; /* Começa escondida */
+    color: #E9E9E9;
+    border: 1px solid #3d5168; /* Borda similar */
 }
 
-.svg {
-    box-shadow: #171a21;
+.mensagem-feedback.success {
+    background-color: rgba(71, 191, 255, 0.2); /* Fundo azulado sutil (do gradiente do botão) */
+    border-color: #47bfff;
+    color: #E9E9E9;
+    display: block;
+}
+
+.mensagem-feedback.error {
+    background-color: rgba(255, 71, 71, 0.2); /* Fundo avermelhado sutil */
+    border-color: #ff4747;
+    color: #E9E9E9;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes particles {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1.1);
+    }
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(102, 192, 244, 0.8);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes hoverEffect {
+    0%, 100% {
+        filter: drop-shadow(0 0 15px rgba(102, 192, 244, 0.9)) 
+                drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(102, 192, 244, 1)) 
+                drop-shadow(0 0 10px rgba(255, 255, 255, 0.9))
+    }
+}
+
+/* Adicione outros keyframes como @particles, @pulse, @rotate, @hoverEffect
+   do cadastroJogos.css aqui se você estiver usando os elementos
+   (como o .logo com todas as suas animações) que dependem deles. */
+
+/* Media Queries (Ajustes básicos para responsividade) */
+@media (max-width: 600px) {
+    header {
+        padding: 0 15px;
+        height: auto; /* Altura automática para caber o conteúdo */
+        flex-direction: column; /* Empilhar para caber melhor */
+        padding-bottom: 10px;
+    }
+    .cabecalho {
+        width: 100%;
+        justify-content: space-between; /* Espaçar menu e título */
+        margin-bottom: 10px; /* Espaço antes do logo */
+    }
+    .logo {
+        margin: 0 auto; /* Centralizar logo */
+    }
+    .centro {
+        padding-top: 160px; /* Ajustar dinamicamente se o header mudar muito */
+    }
+    form#cadastro-usuario-form {
+        padding: 20px;
+        margin: 0 10px; /* Para não colar nas bordas */
+    }
+    .title {
+        font-size: 22px;
+    }
+    .titulo-cabecalho {
+        font-size: 18px;
+    }
 }

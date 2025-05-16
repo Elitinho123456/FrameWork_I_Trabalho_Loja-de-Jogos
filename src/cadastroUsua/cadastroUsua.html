@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuario</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="cadastroUsua.css" rel="stylesheet">
+    <title>Criar Conta - Loja de Jogos</title>
+    <link rel="stylesheet" href="cadastroUsua.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-
 
 <body>
 
     <header>
-         <div class="cabecalho">
-
-            <a href="../Home/index.html">
-
-                <button class="botao_home" type="button">
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="HOME" width="50px" height="50px">
+        <div class="cabecalho">
+            <div class="menu-container"> <button class="botao_menu" type="button" aria-label="Menu Principal">
+                    <img src="../image/menu-burger.svg" alt="MENU" width="50px" height="50px">
                 </button>
-
-            </a>
-            <p>Criar Conta</p>
-            
+                <div class="menu-opcoes">
+                    <a href="../Home/index.html" class="opcao-menu">
+                        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" class="menu-icone">
+                        <span>Home</span>
+                    </a>
+                    <a href="../outra-pagina1/index.html" class="opcao-menu"> <img src="../image/shopping-cart.svg"
+                            alt="Jogos" class="menu-icone">
+                        <span>Jogos</span>
+                    </a>
+                    <a href="../outra-pagina2/index.html" class="opcao-menu"> <img src="../image/apps.svg"
+                            alt="Biblioteca" class="menu-icone">
+                        <span>Biblioteca</span>
+                    </a>
+                </div>
+            </div>
+            <p>Criar Nova Conta</p>
         </div>
-        <img class="svg" src="../image/Frame 1.svg" alt="logo" width="80px" height="80px">
+        <img class="logo" src="../image/Frame 1.svg" alt="logo">
     </header>
 
-    <main class="container-principal">
-        <div class="centro">
-            <h2>Criar Nova Conta</h2>
-            <form id="cadastro-usuario-form">
-               
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" name="nome" id="nome" placeholder="Seu nome completo" required>
-           
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="seuemail@exemplo.com" required>
+    <main class="centro">
+        <form id="cadastro-usuario-form">
+            <h1 class="title">Criar Nova Conta</h1> <input type="text" name="nome" id="nome" placeholder="Nome Completo"
+                required>
 
-                    <label for="senha">Senha:</label>
-                    <input type="password" name="senha" id="senha" placeholder="Pelo menos 6 caracteres" required>
-           
+            <input type="email" name="email" id="email" placeholder="Seu Email" required>
 
-                <button type="submit" class="botao-submit">Criar Conta</button>
-            </form>
-            <div id="user-message-area" class="mensagem-area" role="alert">
-                </div>
+            <input type="password" name="senha" id="senha" placeholder="Crie uma Senha (mín. 6 caracteres)" required>
+
+            <input type="submit" value="Criar Conta">
+        </form>
+
+        <div id="user-message-area" class="mensagem-feedback" role="alert">
         </div>
     </main>
+
     <script src="cadastroUsua.js"></script>
 </body>
+
 </html>
