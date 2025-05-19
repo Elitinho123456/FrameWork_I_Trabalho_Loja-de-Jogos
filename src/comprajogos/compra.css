@@ -1,190 +1,271 @@
-/* Reset e estilos globais */
-body {
+/* Reset básico para remover margens e preenchimentos padrão, e definir box-sizing */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    /* Fonte padrão - pode ajustar se tiver outras fontes importadas */
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #1b2838;
-    color: #c7d5e0;
 }
 
-/* Header styles */
+/* Estilos para o corpo da página */
+body {
+    background-color: #1b2838; /* Cor de fundo inspirada em Steam */
+    color: #c7d5e0; /* Cor do texto clara */
+}
+
+/* Estilos para o cabeçalho (header) */
 header {
-    position: fixed;
+    position: fixed; /* Fixa o cabeçalho no topo da página */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #171a21;
-    color: #c7d5e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    width: 100%; /* Ocupa toda a largura */
+    height: 60px; /* Altura fixa do cabeçalho */
+    background-color: #171a21; /* Cor de fundo escura */
+    color: #c7d5e0; /* Cor do texto clara */
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    font-size: 24px; /* Tamanho da fonte do título */
+    font-weight: bold; /* Fonte em negrito */
+    z-index: 10; /* Garante que o cabeçalho fique acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Sombra na parte inferior */
 }
 
+/* Estilos para o botão "Home" no cabeçalho */
 .btn-home {
-    position: absolute;
-    left: 20px;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #53a9d8;
-    color: #1b2838;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    position: absolute; /* Posiciona o botão absolutamente dentro do header */
+    left: 20px; /* Distância da margem esquerda */
+    padding: 8px 15px; /* Preenchimento interno */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #53a9d8; /* Cor de fundo azul claro */
+    color: #1b2838; /* Cor do texto escura */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
 }
 
 .btn-home:hover {
-    background-color: #386a83;
+    background-color: #386a83; /* Cor de fundo ao passar o mouse */
 }
 
-/* Layout principal */
+/* Layout principal da página, abaixo do cabeçalho */
 .page-content {
-    display: flex;
-    margin-top: 60px; /* Compensar a altura do header */
-    height: calc(100vh - 60px);
-    overflow: hidden;
+    display: flex; /* Usa flexbox para organizar barra lateral e conteúdo principal */
+    margin-top: 60px; /* Adiciona margem superior para compensar a altura do header fixo */
+    height: calc(100vh - 60px); /* Define a altura para ocupar o restante da viewport */
+    overflow: hidden; /* Evita barras de rolagem indesejadas neste contêiner */
 }
 
-/* Aside - Barra lateral */
+/* Estilos para a barra lateral (aside) */
 aside {
-    width: 325px;
-    background-color: #233f56;
-    border-right: 2px solid #1b2838;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    height: 100%; /* Ocupa toda altura disponível */
+    width: 325px; /* Largura fixa da barra lateral */
+    background-color: #233f56; /* Cor de fundo */
+    border-right: 2px solid #1b2838; /* Borda à direita */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); /* Sombra à direita */
+    flex-shrink: 0; /* Impede que a barra lateral encolha */
+    padding: 20px; /* Preenchimento interno */
+    box-sizing: border-box; /* Inclui padding e borda na largura */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza os itens verticalmente */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo exceder a altura */
+    height: 100%; /* Ocupa toda a altura disponível no page-content */
 }
 
-/* Botões na sidebar */
+/* Estilos para a div que contém os botões principais na barra lateral */
 .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza os botões verticalmente */
+    gap: 10px; /* Espaço entre os botões */
+    width: 100%; /* Ocupa toda a largura da aside */
 }
 
+/* Estilos para os botões dentro da div .buttons */
 .buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #53a9d8;
-    color: #1b2838;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    text-align: center;
-    transition: background-color 0.3s ease;
+    padding: 10px 20px; /* Preenchimento interno */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #53a9d8; /* Cor de fundo azul claro */
+    color: #1b2838; /* Cor do texto escura */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 16px; /* Tamanho da fonte */
+    width: 100%; /* Ocupa toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+    transition: background-color 0.3s ease; /* Transição suave */
 }
 
 .buttons button:hover {
-    background-color: #386a83;
+    background-color: #386a83; /* Cor de fundo ao passar o mouse */
 }
 
-/* Área de conteúdo principal */
+/* Estilos para a área de conteúdo principal (main) */
 main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    overflow-y: auto;
+    flex-grow: 1; /* Permite que a área principal ocupe o espaço restante */
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centraliza o formulário horizontalmente */
+    align-items: flex-start; /* Alinha o formulário ao topo */
+    padding: 20px; /* Preenchimento interno */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo exceder */
 }
 
-/* Painéis de conteúdo */
+/* Estilos para os painéis de conteúdo (Lista de Jogos e Biblioteca) */
 .content {
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: #233f56;
-    border: 1px solid #1b2838;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    padding: 30px;
-    flex-direction: column;
-    gap: 15px;
-    box-sizing: border-box;
-    position: relative;
+    display: none; /* Inicialmente oculto */
+    width: 100%; /* Ocupa toda a largura da aside */
+    height: 100%; /* Ocupa toda a altura da aside */
+    background-color: #233f56; /* Cor de fundo */
+    border: 1px solid #1b2838; /* Borda */
+    border-radius: 8px; /* Borda arredondada */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    padding: 30px; /* Preenchimento interno */
+    flex-direction: column; /* Organiza o conteúdo verticalmente */
+    gap: 15px; /* Espaço entre os elementos internos */
+    box-sizing: border-box; /* Inclui padding na dimensão */
+    position: relative; /* Permite posicionamento absoluto dos elementos filhos (como o botão voltar) */
 }
 
+/* Estilos para o contêiner interno dentro dos painéis de conteúdo */
 .content-inner {
-    margin-top: 30px;
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    margin-top: 30px; /* Margem superior para afastar do botão voltar */
+    flex-grow: 1; /* Permite que o conteúdo da lista ocupe o espaço restante */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo da lista exceder */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza os itens da lista verticalmente */
 }
 
+/* Estilos para os títulos dentro dos painéis de conteúdo */
 .content-inner h3 {
     margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #c7d5e0;
+    margin-bottom: 15px; /* Margem inferior */
+    text-align: center; /* Centraliza o texto */
+    color: #c7d5e0; /* Cor do texto clara */
 }
 
-/* Botão voltar */
+/* Estilos para o botão "Voltar" nos painéis de conteúdo */
 .btn-voltar {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #53a9d8;
-    color: #1b2838;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    position: absolute; /* Posiciona o botão absolutamente dentro do painel .content */
+    top: 10px; /* Distância do topo */
+    left: 10px; /* Distância da esquerda */
+    padding: 8px 15px; /* Preenchimento */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #53a9d8; /* Cor de fundo azul claro */
+    color: #1b2838; /* Cor do texto escura */
+    cursor: pointer; /* Cursor clicável */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave */
 }
 
 .btn-voltar:hover {
-    background-color: #386a83;
+    background-color: #386a83; /* Cor de fundo ao passar o mouse */
 }
 
-/* Formulário */
+/* Estilos para o formulário de compra */
 form {
-    width: 80%;
-    max-width: 500px;
-    background-color: #233f56;
-    border: 1px solid #1b2838;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    width: 80%; /* Largura do formulário (80% do contêiner pai) */
+    max-width: 500px; /* Largura máxima */
+    background-color: #233f56; /* Cor de fundo */
+    border: 1px solid #1b2838; /* Borda */
+    border-radius: 8px; /* Borda arredondada */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    padding: 30px; /* Preenchimento interno */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza os elementos do formulário verticalmente */
+    gap: 15px; /* Espaço entre os elementos */
 }
 
+/* Estilos para campos de input de texto (agora todos editáveis) */
 form input[type="text"] {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #1b2838;
-    border-radius: 5px;
-    width: calc(100% - 24px);
-    background-color: #1b2838;
-    color: #c7d5e0;
+    padding: 12px; /* Preenchimento */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 1px solid #1b2838; /* Borda */
+    border-radius: 5px; /* Borda arredondada */
+    width: calc(100% - 24px); /* Calcula a largura levando em conta o padding */
+    background-color: #1b2838; /* Cor de fundo */
+    color: #c7d5e0; /* Cor do texto */
+    /* Removido o estilo específico para [disabled] */
 }
 
+form input[type="text"]:focus {
+    /* Estilos ao focar no campo (opcional, mas bom para usabilidade) */
+    outline: none; /* Remove o outline padrão */
+    border-color: #53a9d8; /* Muda a cor da borda */
+    box-shadow: 0 0 5px rgba(83, 169, 216, 0.5); /* Adiciona uma sombra suave */
+}
+
+form input[type="text"]::placeholder {
+    /* Estilos para o texto do placeholder */
+    color: #8F98A0;
+}
+
+
+/* Estilos para o botão de submit (Comprar) */
 input[type="submit"] {
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #53a9d8;
-    color: #1b2838;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 12px; /* Preenchimento */
+    font-size: 16px; /* Tamanho da fonte */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #53a9d8; /* Cor de fundo azul claro */
+    color: #1b2838; /* Cor do texto escura */
+    cursor: pointer; /* Cursor clicável */
+    transition: background-color 0.3s ease; /* Transição suave */
 }
 
 input[type="submit"]:hover {
-    background-color: #386a83;
+    background-color: #386a83; /* Cor de fundo ao passar o mouse */
+}
+
+/* --- Novos estilos para as listas de jogos (Disponíveis e Biblioteca) --- */
+
+/* Estilos para os contêineres das listas de jogos */
+#jogosDisponiveisList,
+#bibliotecaList {
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza os itens verticalmente */
+    gap: 15px; /* Espaço entre os itens da lista */
+}
+
+/* Estilos para cada item individual de jogo na lista de disponíveis e na biblioteca */
+.jogo-item,
+.jogo-biblioteca-item {
+    background-color: #1b2838; /* Cor de fundo para cada item de jogo */
+    border: 1px solid #3d5168; /* Borda sutil */
+    border-radius: 5px; /* Borda arredondada */
+    padding: 15px; /* Preenchimento interno */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Organiza o conteúdo interno verticalmente */
+    gap: 10px; /* Espaço entre os elementos dentro do item (título, preço, produtor, botão) */
+}
+
+/* Estilos para o título do jogo dentro de cada item */
+.jogo-item h4,
+.jogo-biblioteca-item h4 {
+    margin: 0; /* Remove margens padrão */
+    color: #66C0F4; /* Cor para o título do jogo (azul mais claro) */
+    font-size: 18px; /* Tamanho da fonte */
+}
+
+/* Estilos para os parágrafos de informação do jogo (preço, produtor) */
+.jogo-item p,
+.jogo-biblioteca-item p {
+    margin: 0; /* Remove margens padrão */
+    font-size: 14px; /* Tamanho da fonte */
+    color: #8F98A0; /* Cor para as informações do jogo (cinza claro) */
+}
+
+/* Estilos para o botão "Selecionar para Comprar" dentro do item de jogo disponível */
+.btn-selecionar-jogo {
+    padding: 8px 15px; /* Preenchimento */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #1a44c2; /* Cor de fundo azul */
+    color: white; /* Cor do texto branca */
+    cursor: pointer; /* Cursor clicável */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave */
+    align-self: flex-start; /* Alinha o botão à esquerda dentro do contêiner flex */
+}
+
+.btn-selecionar-jogo:hover {
+    background-color: #1839a8; /* Cor de fundo ao passar o mouse */
 }

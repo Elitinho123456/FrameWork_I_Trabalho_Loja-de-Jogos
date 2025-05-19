@@ -3,24 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="ListaClientes.css" rel="stylesheet">
-    <title>Lista de Clientes</title>
-    <script src="ListaClientes.js"></script>
+    <title>Clientes - Steam Dashboard</title>
+    <link href="./ListaClientes.css" rel="stylesheet">
+    
 </head>
 <body>
-    <h1>Lista de Usuários Cadastrados</h1>
-    <div id="loading-message" class="loading">Carregando...</div>
-    <div id="error-message" class="error"></div>
-    <table id="usuarios-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody id="usuarios-body"></tbody>
-    </table>
-</body>
+    <div class="container">
+        <div class="clientes-header">
+            <h1>Clientes Cadastrados</h1>
+        </div>
 
+        <div class="loading-message">Carregando dados da Steam...</div>
+
+        <table class="clientes-table">
+            <thead>
+                <tr>
+                    <th>Steam ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados seriam populados via JavaScript -->
+                <tr>
+                    <td>STEAM_0:1:123456</td>
+                    <td>João Player</td>
+                    <td>joao@steamcommunity.com</td>
+                </tr>
+                <tr>
+                    <td>STEAM_0:0:654321</td>
+                    <td>Maria Gamer</td>
+                    <td>maria@steamgames.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="steam-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Suporte</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Status do Serviço</a></li>
+                    <li><a href="#">Ajuda Técnica</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Privacidade</a></li>
+                    <li><a href="#">Licenças</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Social</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Discord</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>

@@ -34,41 +34,101 @@ app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
   }
 });
 
+
+// Rota GET adicionada para buscar todos os jogos disponíveis na tabela 'jogos'
+app.get('/jogos-disponiveis', async (request: FastifyRequest, reply: FastifyReply) => {
+  try {
+    // Estabelece a conexão com o banco de dados
+    const conn = await getConnection();
+
+    // Seleciona todos os campos de todos os registros na tabela 'jogos'
+    const [jogosDisponiveis] = await conn.query('SELECT * FROM jogos');
+
+    // Fecha a conexão com o banco de dados
+    await conn.end();
+
+    // Envia a lista de jogos disponíveis como resposta
+    reply.send(jogosDisponiveis);
+  } catch (erro: any) {
+    // Trata erros de banco de dados usando a função auxiliar
+    handleDatabaseError(erro, reply);
+  }
+});
+// Rota POST para realizar a compra de um jogo
+// Esta rota foi modificada para verificar se o jogo já foi comprado antes de inserir na tabela 'compra'.
 app.post('/compra', async (request: FastifyRequest, reply: FastifyReply) => {
+    // Extrai nome, preco e produtor do corpo da requisição
+    // Espera que o corpo da requisição seja um objeto com essas propriedades.
     const { nome, preco, produtor } = request.body as {
       nome: string;
-      preco: number;
+      preco: number; // Espera que o preço venha como número
       produtor: string;
     };
-  
+
+    // Validação inicial dos campos obrigatórios
+    if (!nome || preco === undefined || produtor === undefined) {
+      return reply.status(400).send({ mensagem: 'Nome, preco e produtor são obrigatórios.' });
+    }
+
+    // Valida se o preço é um número válido
+    if (isNaN(parseFloat(preco.toString()))) { // Converte para string para garantir parseFloat
+      return reply.status(400).send({ mensagem: 'O preço deve ser um valor numérico válido.' });
+    }
+
+
     try {
+      // Estabelece a conexão com o banco de dados
       const conn = await getConnection();
-  
-      // Verifica se o jogo já existe pelo nome (ao invés do ID)
-      const [existing] = await conn.query(
-        'SELECT nome FROM compra WHERE nome = ?', 
+
+      // Comentário: Verificar se o jogo a ser comprado existe na tabela 'jogos'.
+      // É importante garantir que apenas jogos cadastrados na lista principal possam ser comprados.
+      const [jogoExistente] = await conn.query(
+        'SELECT * FROM jogos WHERE nome = ?',
         [nome]
       );
-  
+
+      // Se o jogo não existir na tabela 'jogos' (lista de jogos disponíveis), retorna um erro 404.
+      if ((jogoExistente as any[]).length === 0) {
+          await conn.end();
+          return reply.status(404).send({
+              mensagem: `Erro: Jogo '${nome}' não encontrado na lista de jogos disponíveis para compra.`
+          });
+      }
+
+
+      // Comentário: Verifica se o jogo com este nome já foi comprado consultando a tabela 'compra'.
+      // Isso impede compras duplicadas do mesmo jogo para o mesmo usuário (simplificado - não há controle de usuário aqui).
+      const [existing] = await conn.query(
+        'SELECT nome FROM compra WHERE nome = ?',
+        [nome]
+      );
+
+      // Se já existir um registro com o mesmo nome na tabela 'compra', significa que já foi comprado.
       if ((existing as any[]).length > 0) {
+        // Fecha a conexão antes de retornar
         await conn.end();
-        return reply.status(400).send({ 
-          mensagem: 'Erro: Jogo com este nome já foi comprado.' 
+        // Retorna uma mensagem de erro 400 indicando que o item já foi comprado.
+        return reply.status(400).send({
+          mensagem: `Erro: O jogo '${nome}' já foi comprado.`
         });
       }
-  
-      // Insere sem especificar o ID (usando auto-incremento)
+
+      // Comentário: Insere os dados do jogo na tabela 'compra' para registrar a compra.
+      // Um campo de ID auto-incrementado é recomendado para identificar cada compra unicamente.
       const [resultado] = await conn.query(
         'INSERT INTO compra (nome, preco, produtor) VALUES (?, ?, ?)',
         [nome, preco, produtor]
       );
-  
+
+      // Fecha a conexão após a operação
       await conn.end();
-      reply.status(201).send({ 
-        mensagem: 'Compra cadastrada com sucesso.', 
-        dados: resultado 
+      // Retorna sucesso (status 201 - Created) e os dados do resultado da inserção.
+      reply.status(201).send({
+        mensagem: 'Compra realizada com sucesso.',
+        dados: resultado
       });
     } catch (erro: any) {
+      // Trata erros de banco de dados usando a função auxiliar
       handleDatabaseError(erro, reply);
     }
   });

@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="compra.css">
 </head>
 <body>
-    <header>  
-        <a href="../Home/index.html" > <button class="btn-home">Home</button>
-        </a>
+    <header>
+        <button class="btn-home" onclick="window.location.href='../index.html'">Home</button>
         Loja
     </header>
     <div class="page-content">
@@ -23,15 +22,17 @@
                 <button class="btn-voltar" onclick="hideContent()">Voltar</button>
                 <div class="content-inner">
                     <h3>Lista de Jogos Disponíveis</h3>
-                    <!-- Conteúdo da lista de jogos pode ser adicionado aqui -->
+                    <div id="jogosDisponiveisList">
+                        </div>
                 </div>
             </div>
 
             <div id="biblioteca" class="content">
-                <button class="btn-voltar" onclick="hideContent()">Voltar</button>
-                <div class="content-inner">
+                 <button class="btn-voltar" onclick="hideContent()">Voltar</button>
+                 <div class="content-inner">
                     <h3>Sua Biblioteca de Jogos</h3>
-                    <!-- Conteúdo da biblioteca pode ser adicionado aqui -->
+                    <div id="bibliotecaList">
+                        </div>
                 </div>
             </div>
         </aside>
@@ -42,6 +43,7 @@
                 <input type="text" id="nome" name="nome" placeholder="Nome do jogo">
                 <input type="text" id="preco" name="preco" placeholder="Preço">
                 <input type="text" id="produtor" name="produtor" placeholder="Produtor">
+
                 <input type="submit" value="Comprar">
             </form>
         </main>
