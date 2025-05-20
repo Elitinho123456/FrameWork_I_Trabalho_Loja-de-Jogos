@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
         });
     } else {
+
         console.warn('Elementos do menu não encontrados. A funcionalidade do menu pode não funcionar.');
+
     }
 
 });
@@ -67,23 +69,100 @@ async function enviaBancoJogos() {
 
     try {
         const resposta = await fetch("http://localhost:5000/jogos", {
+
             headers: {
                 'Content-Type': 'application/json'
             },
             method: "POST",
             body: JSON.stringify(obj)
+
         });
 
         const data = await resposta.json();
 
         if (resposta.ok) {
+
             alert('Jogo cadastrado com sucesso!');
-            form.reset(); // Agora funciona
+            form.reset();
+
         } else {
+
             alert(`Erro: ${data.mensagem || 'Falha ao cadastrar jogo'}`);
         }
+
     } catch (erro) {
+        
         console.error('Erro:', erro);
-        alert("Erro de conexão com o servidor.");
+        
+        let mensagemErro = 'Erro ao cadastrar jogo';
+        
+        if (erro instanceof TypeError && erro.message.includes('Failed to fetch')) {
+
+            mensagemErro = 'Falha na conexão com o servidor. Verifique sua rede ou tente novamente mais tarde.';
+
+        } else if (erro.name === 'AbortError') {
+
+            mensagemErro = 'A requisição foi cancelada devido ao tempo de espera.';
+
+        } else if (erro.cause) {
+
+            switch(erro.cause.status) {
+
+                case 400:
+                    mensagemErro = 'Dados inválidos enviados ao servidor. Verifique os campos.';
+                    if (erro.cause.data.mensagem) {
+                        mensagemErro += ` Detalhes: ${erro.cause.data.mensagem}`;
+                    }
+                    break;
+
+                case 401:
+                    mensagemErro = 'Não autorizado. Você precisa estar autenticado.';
+                    break;
+
+                case 403:
+                    mensagemErro = 'Acesso proibido. Você não tem permissão para esta ação.';
+                    break;
+
+                case 404:
+                    mensagemErro = 'Endpoint não encontrado. O serviço pode estar indisponível.';
+                    break;
+
+                case 409:
+                    mensagemErro = 'Conflito. Este jogo já pode estar cadastrado.';
+                    break;
+
+                case 413:
+                    mensagemErro = 'Dados muito grandes. Reduza o tamanho dos campos.';
+                    break;
+
+                case 422:
+                    mensagemErro = 'Erro de validação. Verifique os dados enviados.';
+                    if (erro.cause.data.erros) {
+                        mensagemErro += ` Erros: ${JSON.stringify(erro.cause.data.erros)}`;
+                    }
+                    break;
+
+                case 500:
+                    mensagemErro = 'Erro interno do servidor. Tente novamente mais tarde.';
+                    break;
+
+                case 501:
+                    mensagemErro = 'Funcionalidade não implementada no servidor.';
+                    break;
+
+                case 503:
+                    mensagemErro = 'Serviço indisponível. O servidor pode estar em manutenção.';
+                    break;
+                default:
+                    mensagemErro = `Erro HTTP ${erro.cause.status}: ${erro.message}`;
+            }
+        } else {
+
+            mensagemErro = erro.message || 'Erro desconhecido ao processar a requisição.';
+
+        }
+        
+        alert(mensagemErro);
+
     }
 }

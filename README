@@ -1,0 +1,62 @@
+##Como Rodar o Projeto Localmente
+Para configurar e executar este projeto em sua máquina, siga os passos abaixo:
+
+#Pré-requisitos:
+
+Node.js e npm: Certifique-se de ter o Node.js e o npm (gerenciador de pacotes do Node.js) instalados. Você pode baixá-los em nodejs.org.
+Servidor Web e Banco de Dados: Você precisará de um ambiente de servidor web com PHP e um banco de dados MySQL. Recomendamos o uso do Laragon, que facilita a instalação e configuração desses serviços. Você pode baixá-lo em laragon.org.
+Configuração do Banco de Dados:
+
+Com o Laragon instalado e rodando, acesse o painel do MySQL (geralmente via phpMyAdmin ou o terminal do Laragon).
+Execute o seguinte script SQL para criar o banco de dados e as tabelas necessárias:
+<!-- end list -->
+
+#SQL
+
+create database framework;
+
+use framework;
+
+create table compra (
+    id int unsigned auto_increment primary key,
+    nome varchar(100) not null,
+    preco decimal(10,2) not null,
+    produtor varchar(100)
+);
+
+create table usuario (
+    id int unsigned auto_increment primary key,
+    nome varchar(100) not null,
+    email varchar(100) not null,
+    senha varchar(50) not null
+);
+
+CREATE TABLE jogos (
+    id int unsigned auto_increment primary key,
+    nome VARCHAR(255) NOT NULL,
+    preco DECIMAL(20,2) NOT NULL,
+    produtor VARCHAR(255) NOT NULL
+);
+Instalação das Dependências do Projeto:
+
+Navegue até o diretório raiz do projeto em seu terminal.
+Execute o comando npm install para instalar todas as dependências do Node.js.
+Iniciando o Servidor de Desenvolvimento:
+
+No terminal, ainda no diretório raiz do projeto, execute o comando:
+Bash
+
+npm run dev
+Este comando iniciará o servidor de desenvolvimento e você poderá acessar o projeto no seu navegador, geralmente em http://localhost:3000 (ou a porta que o npm indicar).
+Tema Escolhido: Loja de Jogos (Steam-like)
+O projeto foi desenvolvido com base no conceito de uma loja de jogos online, fortemente inspirada na plataforma Steam. Nosso objetivo é simular as funcionalidades essenciais de uma loja de games, onde os usuários podem explorar um catálogo de jogos e interagir com o sistema de compra.
+
+#Funcionalidades Implementadas
+As seguintes funcionalidades foram desenvolvidas e estão presentes no projeto:
+
+Cadastro de Jogos: Permite adicionar novos jogos ao catálogo da loja, incluindo informações como nome, preço e produtor.
+Cadastro de Usuários: Possibilita o registro de novos usuários na plataforma, com campos para nome, e-mail e senha.
+Visualização de Dados Cadastrados:
+Visualização de Usuários: É possível listar e visualizar os dados de todos os usuários cadastrados.
+Visualização de Jogos: Permite a listagem e visualização detalhada dos jogos disponíveis no catálogo.
+Sistema de Compra (Apenas Visual): Uma funcionalidade que simula o processo de compra de um jogo. Importante: Esta funcionalidade é puramente visual e não processa transações reais ou impacta o banco de dados de compras. Ela serve para demonstrar a interação do usuário com um carrinho de compras e o fluxo de checkout.
