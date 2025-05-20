@@ -139,3 +139,236 @@ body {
         grid-template-columns: 1fr;
     }
 }
+header {
+    height: 104px;
+    width: 100%;
+    background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: transparent; /* Importante para não sobrescrever o gradiente do header */
+}
+
+/* Estilo para o link 'Início' no header - Adaptado de .botao_home e .botao_menu */
+.botao_home_link_estilizado {
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
+    padding: 10px; /* Ajustado */
+    min-width: 80px; /* Largura mínima similar aos botões do menu */
+    height: 50px; /* Altura ajustada */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza conteúdo do botão */
+    color: white;
+    font-size: 14px; /* Tamanho da fonte do texto */
+}
+
+.botao_home_link_estilizado:hover {
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+    transform: scale(1.05);
+}
+
+.home_icon_estilizado {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+}
+
+.botao_home_link_estilizado span {
+    background-color: transparent; /* Garante que o span não tenha fundo próprio */
+}
+
+/* Título no Cabeçalho (pode ser o <p> ou um <h1>/<h2> se preferir semanticamente) */
+.titulo-cabecalho { /* Usando a classe que definimos no HTML */
+    color: #c7d5e0;
+    font-size: 24px;
+    font-weight: 300;
+    background: transparent; /* Importante */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo {
+    width: 80px; /* Mantendo o tamanho do logo do cadastroJogos */
+    height: auto; /* Para manter proporção caso a imagem seja diferente */
+    border-radius: 50%; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
+}
+
+.logo:hover {
+    animation: pulse 2s infinite alternate, rotate 4s infinite linear, hoverEffect 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(102, 192, 244, 0.9));
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(7, 143, 221, 0.3) 0%, transparent 70%);
+    animation: particles 4s infinite linear;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover::after {
+    opacity: 1;
+}
+
+/* Estilos para o Menu Dropdown (copiados do cadastroJogos.css) */
+.menu-container {
+    position: relative;
+    display: inline-block; /* Ou flex, dependendo de como está no .cabecalho */
+    background: transparent;
+}
+
+.botao_menu {
+    background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
+    width: 70px; /* Ajustado para caber melhor */
+    height: 50px; /* Ajustado */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao_menu:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
+}
+
+.botao_menu img {
+    width: 30px; /* Ajustado */
+    height: 30px; /* Ajustado */
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+}
+
+.menu-opcoes {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(135deg, #2a3f5a 0%, #1b2838 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid #3d5168;
+    width: 200px;
+    z-index: 100;
+    display: none; /* Começa escondido */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.menu-container:hover .menu-opcoes { /* Mostrar no hover */
+    display: flex;
+    animation: fadeIn 0.3s ease-in-out; /* Keyframe 'fadeIn' precisa ser definido */
+}
+
+.opcao-menu {
+    padding: 15px 20px;
+    color: #c7d5e0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #3d5168;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    background: transparent; /* Importante */
+}
+.opcao-menu span {
+    background: transparent;
+}
+
+.opcao-menu:last-child {
+    border-bottom: none;
+}
+
+.opcao-menu:hover {
+    background-color: rgba(102, 192, 244, 0.1);
+    color: #66C0F4;
+    padding-left: 25px;
+}
+
+.menu-icone {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    filter: brightness(0) invert(1) opacity(0.8);
+    transition: all 0.3s ease;
+    background: transparent; /* Importante */
+}
+
+.opcao-menu:hover .menu-icone {
+    filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(102, 192, 244, 0.8));
+    transform: scale(1.1);
+}
+header {
+    height: 104px;
+    width: 100%;
+    background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Isso empurrará o conteúdo para as extremidades */
+    padding: 0 30px; /* Mantém o preenchimento para o espaçamento geral */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: transparent;
+}
+
+/* Não há necessidade de alterar .botao_home_link_estilizado ou .home_icon_estilizado */
+
+/* Mantenha o .titulo-cabecalho como está */
+
+.logo {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
+    /* Remova qualquer margin-left ou margin-right daqui se adicionado anteriormente */
+    /* O justify-content: space-between no header cuidará do seu posicionamento */
+}
+
+/* ... o resto do seu CSS ... */
+.logo {
+    transform: translateX(-40px);
+}
