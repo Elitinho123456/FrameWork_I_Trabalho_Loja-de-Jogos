@@ -76,6 +76,8 @@ async function trataFormCadastroUsua(event) {
             displayUsuamessageArea("Erro de comunicação com o servidor. Tente novamente.", 'error');
     }
 
+    
+
 }
 
 function displayUsuamessageArea(message, type) {

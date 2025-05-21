@@ -215,6 +215,7 @@ header {
     filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
 }
 
+
 .logo:hover {
     animation: pulse 2s infinite alternate, rotate 4s infinite linear, hoverEffect 1.5s infinite ease-in-out;
     filter: drop-shadow(0 0 15px rgba(102, 192, 244, 0.9));
@@ -371,4 +372,22 @@ header {
 /* ... o resto do seu CSS ... */
 .logo {
     transform: translateX(-40px);
+}
+.logo {
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
+  transform: translateX(-40px); /* Mantém o deslocamento para a esquerda */
+  animation: rotate 4s linear infinite; /* Adiciona a animação de rotação */
+}
+
+@keyframes rotate {
+  from {
+    transform: translateX(-40px) rotate(0deg); /* Inclui translateX para manter a posição */
+  }
+  to {
+    transform: translateX(-40px) rotate(360deg); /* Inclui translateX para manter a posição */
+  }
 }

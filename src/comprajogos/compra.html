@@ -3,47 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra de jogos</title>
+    <title>Compra de Jogos</title>
     <link rel="stylesheet" href="compra.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <button class="btn-home" onclick="window.location.href='../index.html'">Home</button>
-        Loja
+        <div class="cabecalho">
+            <div class="menu-container">
+                <button class="botao_menu" type="button" aria-label="Menu Principal">
+                    <img src="../image/menu-burger.svg" alt="MENU" width="30px" height="30px"> </button>
+                <div class="menu-opcoes">
+                    <a href="../Home/index.html" class="opcao-menu">
+                        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" class="menu-icone">
+                        <span>Home</span>
+                    </a>
+                    <a href="../comprajogos/compra.html" class="opcao-menu">
+                        <img src="../image/shopping-cart.svg" alt="Jogos" class="menu-icone">
+                        <span>Jogos</span>
+                    </a>
+                    <a href="../outra-pagina2/index.html" class="opcao-menu">
+                        <img src="../image/apps.svg" alt="Biblioteca" class="menu-icone">
+                        <span>Biblioteca</span>
+                    </a>
+                </div>
+            </div>
+            <p>Loja de Jogos</p>
+        </div>
+        <img class="logo" src="../image/Frame 1.svg" alt="logo">
     </header>
-    <div class="page-content">
-        <aside>
-            <div id="mainButtons" class="buttons">
-                <button onclick="showContent('lista')">Lista de Jogos</button>
-                <button onclick="showContent('biblioteca')">Biblioteca</button>
+
+    <div class="page-wrapper">
+        <aside class="left-panel">
+            <div id="mainButtons" class="buttons-visible">
+                <button onclick="toggleSideContent('biblioteca')">Biblioteca</button>
+                <button onclick="toggleSideContent('lista')">Lista de Jogos</button>
             </div>
 
-            <div id="lista" class="content">
-                <button class="btn-voltar" onclick="hideContent()">Voltar</button>
+            <div id="lista" class="content-panel" style="display: none;"> <button class="btn-voltar" onclick="closeSideContent()">Voltar</button>
                 <div class="content-inner">
-                    <h3>Lista de Jogos Disponíveis</h3>
-                    <div id="jogosDisponiveisList">
-                        </div>
+                    <h3>Jogos Disponíveis na Loja</h3>
+                    <div id="jogosDisponiveisList"></div>
                 </div>
             </div>
 
-            <div id="biblioteca" class="content">
-                 <button class="btn-voltar" onclick="hideContent()">Voltar</button>
+            <div id="biblioteca" class="content-panel" style="display: none;"> <button class="btn-voltar" onclick="closeSideContent()">Voltar</button>
                  <div class="content-inner">
                     <h3>Sua Biblioteca de Jogos</h3>
-                    <div id="bibliotecaList">
-                        </div>
+                    <div id="bibliotecaList"></div>
                 </div>
             </div>
         </aside>
 
-        <main>
+        <main class="compra-form-container">
             <form id="compraForm" onsubmit="event.preventDefault(); trataForm();">
                 <h3>Informações do Jogo</h3>
-                <input type="text" id="nome" name="nome" placeholder="Nome do jogo">
-                <input type="text" id="preco" name="preco" placeholder="Preço">
-                <input type="text" id="produtor" name="produtor" placeholder="Produtor">
+                <input type="text" id="nome" name="nome" placeholder="Nome do jogo" required>
+                <input type="text" id="preco" name="preco" placeholder="Preço" required>
+                <input type="text" id="produtor" name="produtor" placeholder="Produtor" required>
+                <input type="submit" value="Comprar">
+            </form>
+        </main>
+    </div>
 
+    <script src="compra.js"></script>
+</body>
+</html>         </div>
+            </div>
+        </aside>
+
+        <main class="compra-form-container">
+            <form id="compraForm" onsubmit="event.preventDefault(); trataForm();">
+                <h3>Informações do Jogo</h3>
+                <input type="text" id="nome" name="nome" placeholder="Nome do jogo" required>
+                <input type="text" id="preco" name="preco" placeholder="Preço" required>
+                <input type="text" id="produtor" name="produtor" placeholder="Produtor" required>
                 <input type="submit" value="Comprar">
             </form>
         </main>
