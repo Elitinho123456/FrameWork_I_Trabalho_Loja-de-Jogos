@@ -12,18 +12,21 @@ body {
     background-color: #1B2838;
     color: #E9E9E9;
     line-height: 1.6;
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    overflow-x: hidden;
+    /* Evita rolagem horizontal indesejada */
 }
 
 /* ==================== Estilos do Cabeçalho (Copiado e adaptado de cadastroJogos.css / cadastroUsua.css) ==================== */
 header {
-    height: 80px; /* Reduzido de 104px */
+    height: 80px;
+    /* Reduzido de 104px */
     width: 100%;
     background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px; /* Reduzido de 30px */
+    padding: 0 20px;
+    /* Reduzido de 30px */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
@@ -34,16 +37,19 @@ header {
 .cabecalho {
     display: flex;
     align-items: center;
-    gap: 15px; /* Reduzido de 20px */
+    gap: 15px;
+    /* Reduzido de 20px */
     background: transparent;
 }
 
 .cabecalho p {
     color: #c7d5e0;
-    font-size: 20px; /* Reduzido de 24px */
+    font-size: 20px;
+    /* Reduzido de 24px */
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.2px; /* Reduzido de 1.5px */
+    letter-spacing: 1.2px;
+    /* Reduzido de 1.5px */
 }
 
 /* Menu Burger */
@@ -53,8 +59,10 @@ header {
 
 .botao_menu {
     background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
-    width: 40px; /* Reduzido de 50px */
-    height: 40px; /* Reduzido de 50px */
+    width: 40px;
+    /* Reduzido de 50px */
+    height: 40px;
+    /* Reduzido de 50px */
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -62,46 +70,56 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(102, 192, 244, 0.7); /* Reduzido de 15px */
+    box-shadow: 0 0 10px rgba(102, 192, 244, 0.7);
+    /* Reduzido de 15px */
 }
 
 .botao_menu:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(102, 192, 244, 0.9); /* Reduzido de 20px */
+    box-shadow: 0 0 15px rgba(102, 192, 244, 0.9);
+    /* Reduzido de 20px */
 }
 
 .botao_menu img {
     filter: brightness(0) invert(1);
-    width: 24px; /* Reduzido de 30px */
-    height: 24px; /* Reduzido de 30px */
+    width: 24px;
+    /* Reduzido de 30px */
+    height: 24px;
+    /* Reduzido de 30px */
 }
 
 .menu-opcoes {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50px; /* Ajustado para nova altura do botão */
+    top: 50px;
+    /* Ajustado para nova altura do botão */
     left: 0;
     background-color: #1a2a3a;
     border: 1px solid #3d5168;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    min-width: 180px; /* Reduzido de 200px */
+    min-width: 180px;
+    /* Reduzido de 200px */
     z-index: 1050;
-    animation: fadeIn 0.3s ease-out; /* Mantido o fadeIn */
+    animation: fadeIn 0.3s ease-out;
+    /* Mantido o fadeIn */
 }
 
 .opcao-menu {
     display: flex;
     align-items: center;
-    padding: 12px 15px; /* Reduzido de 15px 20px */
+    padding: 12px 15px;
+    /* Reduzido de 15px 20px */
     color: #c7d5e0;
     text-decoration: none;
-    font-size: 15px; /* Reduzido de 16px */
+    font-size: 15px;
+    /* Reduzido de 16px */
     transition: all 0.3s ease;
     border-bottom: 1px solid #3d5168;
     text-transform: uppercase;
-    letter-spacing: 0.8px; /* Reduzido de 1px */
+    letter-spacing: 0.8px;
+    /* Reduzido de 1px */
 }
 
 .opcao-menu:last-child {
@@ -111,14 +129,17 @@ header {
 .opcao-menu:hover {
     background-color: #2a475e;
     color: #fff;
-    padding-left: 20px; /* Ajustado para nova largura de padding */
+    padding-left: 20px;
+    /* Ajustado para nova largura de padding */
 }
 
 .opcao-menu .menu-icone {
-    margin-right: 10px; /* Reduzido de 12px */
+    margin-right: 10px;
+    /* Reduzido de 12px */
     filter: brightness(0) invert(1) opacity(0.8);
     transition: all 0.3s ease;
-    width: 20px; /* Reduzido para ícones menores no menu */
+    width: 20px;
+    /* Reduzido para ícones menores no menu */
     height: 20px;
 }
 
@@ -129,7 +150,8 @@ header {
 
 /* Logo Animada */
 .logo {
-    width: 60px; /* Reduzido de 80px */
+    width: 60px;
+    /* Reduzido de 80px */
     height: auto;
     animation: rotate 10s linear infinite, hoverEffect 3s ease-in-out infinite alternate;
     transition: transform 0.3s ease;
@@ -143,8 +165,10 @@ header {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-5px); /* Menor deslocamento */
+        transform: translateY(-5px);
+        /* Menor deslocamento */
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -155,19 +179,23 @@ header {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
 }
 
 @keyframes hoverEffect {
-    0%, 100% {
-        filter: drop-shadow(0 0 10px rgba(102, 192, 244, 0.9))
-                drop-shadow(0 0 3px rgba(255, 255, 255, 0.7)); /* Sombras menores */
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 10px rgba(102, 192, 244, 0.9)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+        /* Sombras menores */
     }
+
     50% {
-        filter: drop-shadow(0 0 15px rgba(102, 192, 244, 1))
-                drop-shadow(0 0 7px rgba(255, 255, 255, 0.9)); /* Sombras menores */
+        filter: drop-shadow(0 0 15px rgba(102, 192, 244, 1)) drop-shadow(0 0 7px rgba(255, 255, 255, 0.9));
+        /* Sombras menores */
     }
 }
 
@@ -176,7 +204,8 @@ header {
 /* Layout Principal */
 .page-wrapper {
     display: flex;
-    padding-top: 100px; /* Altura do header (80px) + 20px de margem */
+    padding-top: 100px;
+    /* Altura do header (80px) + 20px de margem */
     min-height: 100vh;
     padding-left: 20px;
     padding-right: 20px;
@@ -189,20 +218,30 @@ header {
 /* Painel Esquerdo (Aside) */
 .left-panel {
     background-color: #2a475e;
-    padding: 20px; /* Reduzido de 25px */
+    padding: 20px;
+    /* Reduzido de 25px */
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    width: 25%; /* 25% da largura horizontal */
-    max-width: 300px; /* Limite máximo para telas muito largas */
-    min-width: 200px; /* Limite mínimo para telas menores */
-    position: fixed; /* Fixa o painel na tela */
-    top: 100px; /* Abaixo do header (80px) + 20px de margem */
-    left: 20px; /* Colado no canto esquerdo, respeitando o padding do .page-wrapper */
-    height: calc(100vh - 100px - 20px); /* Altura total da viewport menos header e margens */
+    width: 25%;
+    /* 25% da largura horizontal */
+    max-width: 300px;
+    /* Limite máximo para telas muito largas */
+    min-width: 200px;
+    /* Limite mínimo para telas menores */
+    position: fixed;
+    /* Fixa o painel na tela */
+    top: 100px;
+    /* Abaixo do header (80px) + 20px de margem */
+    left: 20px;
+    /* Colado no canto esquerdo, respeitando o padding do .page-wrapper */
+    height: calc(100vh - 100px - 20px);
+    /* Altura total da viewport menos header e margens */
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reduzido de 20px */
-    overflow: hidden; /* Mantido para que o conteúdo interno não "estoure" o painel */
+    gap: 15px;
+    /* Reduzido de 20px */
+    overflow: hidden;
+    /* Mantido para que o conteúdo interno não "estoure" o painel */
     z-index: 900;
 }
 
@@ -215,22 +254,28 @@ header {
 .left-panel .buttons-visible button {
     background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
     color: #fff;
-    padding: 12px 15px; /* Reduzido de 15px 20px */
+    padding: 12px 15px;
+    /* Reduzido de 15px 20px */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px; /* Reduzido de 18px */
+    font-size: 16px;
+    /* Reduzido de 18px */
     font-weight: 600;
-    letter-spacing: 0.8px; /* Reduzido de 1px */
+    letter-spacing: 0.8px;
+    /* Reduzido de 1px */
     text-transform: uppercase;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Reduzido de 10px */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    /* Reduzido de 10px */
 }
 
 .left-panel .buttons-visible button:hover {
     background: linear-gradient(to right, #3aa8e8 0%, #1839a8 100%);
-    transform: translateY(-1px); /* Reduzido de -2px */
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3); /* Reduzido de 15px */
+    transform: translateY(-1px);
+    /* Reduzido de -2px */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+    /* Reduzido de 15px */
 }
 
 /* Conteúdo da Biblioteca/Lista de Jogos (Panéis que aparecem/desaparecem instantaneamente) */
@@ -241,10 +286,12 @@ header {
     width: 100%;
     height: 100%;
     background-color: #1B2838;
-    padding: 20px; /* Reduzido de 25px */
+    padding: 20px;
+    /* Reduzido de 25px */
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    display: none; /* Controlado por JS para display: flex; ou block; */
+    display: none;
+    /* Controlado por JS para display: flex; ou block; */
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
@@ -258,22 +305,29 @@ header {
 
 .content-panel h3 {
     color: #7cafe9;
-    font-size: 20px; /* Reduzido de 22px */
-    margin-bottom: 15px; /* Reduzido de 20px */
+    font-size: 20px;
+    /* Reduzido de 22px */
+    margin-bottom: 15px;
+    /* Reduzido de 20px */
     text-align: center;
-    border-bottom: 1px solid #3d5168; /* Reduzido de 2px */
-    padding-bottom: 8px; /* Reduzido de 10px */
+    border-bottom: 1px solid #3d5168;
+    /* Reduzido de 2px */
+    padding-bottom: 8px;
+    /* Reduzido de 10px */
 }
 
 .content-panel .btn-voltar {
     background-color: #e74c3c;
     color: white;
-    padding: 8px 12px; /* Reduzido de 10px 15px */
+    padding: 8px 12px;
+    /* Reduzido de 10px 15px */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px; /* Reduzido de 16px */
-    margin-bottom: 10px; /* Reduzido de 15px */
+    font-size: 14px;
+    /* Reduzido de 16px */
+    margin-bottom: 10px;
+    /* Reduzido de 15px */
     transition: background-color 0.3s ease;
     align-self: flex-start;
 }
@@ -282,31 +336,42 @@ header {
     background-color: #c0392b;
 }
 
-.jogos-list, .biblioteca-list {
+.jogos-list,
+.biblioteca-list {
     list-style: none;
     display: grid;
-    gap: 12px; /* Reduzido de 15px */
+    gap: 12px;
+    /* Reduzido de 15px */
 }
 
-.jogos-list li, .biblioteca-list li {
+.jogos-list li,
+.biblioteca-list li {
     background-color: #131f2c;
-    padding: 12px; /* Reduzido de 15px */
-    border-radius: 6px; /* Reduzido de 8px */
+    padding: 12px;
+    /* Reduzido de 15px */
+    border-radius: 6px;
+    /* Reduzido de 8px */
     border: 1px solid #2a3b4e;
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Reduzido de 5px */
+    gap: 4px;
+    /* Reduzido de 5px */
 }
 
-.jogos-list li h2, .biblioteca-list li h2 {
+.jogos-list li h2,
+.biblioteca-list li h2 {
     color: #7cafe9;
-    font-size: 1.1rem; /* Reduzido de 1.2rem */
-    margin-bottom: 3px; /* Reduzido de 5px */
+    font-size: 1.1rem;
+    /* Reduzido de 1.2rem */
+    margin-bottom: 3px;
+    /* Reduzido de 5px */
 }
 
-.jogos-list li p, .biblioteca-list li p {
+.jogos-list li p,
+.biblioteca-list li p {
     color: #c7d5e0;
-    font-size: 0.9rem; /* Reduzido de 0.95rem */
+    font-size: 0.9rem;
+    /* Reduzido de 0.95rem */
 }
 
 /* Formulário de Compra (Main) */
@@ -321,10 +386,12 @@ header {
     flex-direction: column;
     align-items: center;
     position: sticky;
-    top: 100px; /* Ajusta com a nova altura do header + padding */
+    top: 100px;
+    /* Ajusta com a nova altura do header + padding */
     height: fit-content;
     /* Calcula a margem esquerda para posicionar ao lado do aside fixo */
-    margin-left: calc(25% + 20px + 20px); /* 25% do aside + 20px padding left do wrapper + 20px gap */
+    margin-left: calc(25% + 20px + 20px);
+    /* 25% do aside + 20px padding left do wrapper + 20px gap */
     flex-shrink: 0;
 }
 
@@ -445,35 +512,48 @@ header {
         flex-direction: column;
         padding-bottom: 10px;
     }
+
     .cabecalho {
         width: 100%;
         justify-content: center;
         margin-bottom: 10px;
         gap: 10px;
     }
+
     .cabecalho p {
-        font-size: 18px; /* Ajuste para mobile */
+        font-size: 18px;
+        /* Ajuste para mobile */
         text-align: center;
     }
+
     .logo {
         margin-top: 10px;
-        width: 50px; /* Ajuste para mobile */
+        width: 50px;
+        /* Ajuste para mobile */
     }
+
     .menu-opcoes {
-        top: 50px; /* Ajusta a posição para nova altura do header */
+        top: 50px;
+        /* Ajusta a posição para nova altura do header */
         min-width: unset;
         width: 100%;
         left: 0;
         right: 0;
         border-radius: 0;
     }
+
     .botao_menu {
-        width: 35px; /* Ajuste para mobile */
-        height: 35px; /* Ajuste para mobile */
+        width: 35px;
+        /* Ajuste para mobile */
+        height: 35px;
+        /* Ajuste para mobile */
     }
+
     .botao_menu img {
-        width: 20px; /* Ajuste para mobile */
-        height: 20px; /* Ajuste para mobile */
+        width: 20px;
+        /* Ajuste para mobile */
+        height: 20px;
+        /* Ajuste para mobile */
     }
 }
 
@@ -481,21 +561,27 @@ header {
     .cabecalho p {
         font-size: 16px;
     }
-    .left-panel, .compra-form-container {
+
+    .left-panel,
+    .compra-form-container {
         width: 100%;
         padding: 15px;
     }
+
     .left-panel .buttons-visible button {
         font-size: 15px;
         padding: 10px;
     }
+
     .content-panel h3 {
         font-size: 17px;
     }
+
     .content-panel .btn-voltar {
         font-size: 13px;
         padding: 7px 9px;
     }
+
     #compraForm input[type="text"],
     #compraForm input[type="submit"] {
         padding: 10px;
