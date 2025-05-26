@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // Renamed function to be more descriptive and handle showing main buttons
     window.showMainButtons = function() {
         if (currentActivePanel) {
             currentActivePanel.style.display = 'none';
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await resposta.json();
 
             if (resposta.ok) {
-                const jogos = data.jogos; // Correctly access the 'jogos' array from the response object
+                const jogos = data.jogos; 
 
                 if (jogos && jogos.length > 0) {
                     jogosDisponiveisList.innerHTML = '';
