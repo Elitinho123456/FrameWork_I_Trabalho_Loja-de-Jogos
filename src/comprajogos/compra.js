@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await resposta.json();
 
             if (resposta.ok) {
-                const jogos = data.jogos; 
+                const jogos = data.jogos;
 
                 if (jogos && jogos.length > 0) {
                     jogosDisponiveisList.innerHTML = '';
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     jogosDisponiveisList.innerHTML = '<p>Nenhum jogo disponível no momento.</p>';
                 }
             } else {
-                jogosDisponiveisList.innerHTML = `<p>Erro ao carregar jogos: ${data.error || 'Erro desconhecido'}</p>`;
+                jogosDisponiveisList.innerHTML = `<p>Erro ao carregar jogos: ${data.error || 'Ocorreu um problema ao buscar os jogos.'}</p>`;
             }
         } catch (error) {
             console.error('Erro ao buscar jogos disponíveis:', error);
-            jogosDisponiveisList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar jogos.</p>';
+            jogosDisponiveisList.innerHTML = '<p>Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.</p>';
         }
     }
 
@@ -119,11 +119,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     bibliotecaList.innerHTML = '<p>Sua biblioteca está vazia.</p>';
                 }
             } else {
-                bibliotecaList.innerHTML = `<p>Erro ao carregar biblioteca: ${jogosComprados.error || 'Erro desconhecido'}</p>`;
+                bibliotecaList.innerHTML = `<p>Erro ao carregar biblioteca: ${jogosComprados.error || 'Ocorreu um problema ao buscar sua biblioteca.'}</p>`;
             }
         } catch (error) {
             console.error('Erro ao buscar biblioteca:', error);
-            bibliotecaList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar a biblioteca.</p>';
+            bibliotecaList.innerHTML = '<p>Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.</p>';
         }
     }
 
@@ -132,8 +132,22 @@ document.addEventListener('DOMContentLoaded', function () {
         const preco = precoInput.value.trim();
         const produtor = produtorInput.value.trim();
 
-        if (!nome || !preco || !produtor) {
-            alert('Por favor, preencha todos os campos do jogo.');
+        let isValid = true;
+
+        if (!nome) {
+            alert('Por favor, preencha o nome do jogo.');
+            isValid = false;
+        }
+        if (!preco || isNaN(parseFloat(preco))) {
+            alert('Por favor, insira um preço válido para o jogo.');
+            isValid = false;
+        }
+        if (!produtor) {
+            alert('Por favor, preencha o produtor do jogo.');
+            isValid = false;
+        }
+
+        if (!isValid) {
             return;
         }
 
@@ -161,11 +175,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     await carregarBiblioteca();
                 }
             } else {
-                alert(result.error || `Erro ao efetuar a compra (status: ${resposta.status})`);
+                alert(result.error || `Erro ao efetuar a compra (status: ${resposta.status}). Tente novamente.`);
             }
         } catch (error) {
             console.error('Erro na requisição de compra:', error);
-            alert('Erro de comunicação com o servidor. Tente novamente.');
+            alert('Erro de comunicação com o servidor ao tentar comprar o jogo. Verifique sua conexão.');
         }
     };
 });

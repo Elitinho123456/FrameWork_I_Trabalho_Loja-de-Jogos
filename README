@@ -16,12 +16,14 @@ create database framework;
 
 use framework;
 
-create table compra (
-    id int unsigned auto_increment primary key,
-    nome varchar(100) not null,
-    preco decimal(10,2) not null,
-    produtor varchar(100)
-);
+    CREATE TABLE comprado (
+	 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	 nome VARCHAR(255) NOT NULL,
+	  preco DECIMAL(10, 2) NOT NULL,
+	  produtor  VARCHAR(255) NOT NULL, -- 
+	 data_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	status_compra VARCHAR(50) NOT NULL DEFAULT 'Comprado' );
+
 
 create table usuario (
     id int unsigned auto_increment primary key,
