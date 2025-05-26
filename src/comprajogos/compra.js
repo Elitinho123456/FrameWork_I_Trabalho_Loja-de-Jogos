@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.toggleSideContent = async function(contentType) {
-        // Hide all content panels and main buttons initially
+       
         mainButtons.style.display = 'none';
         listaContent.style.display = 'none';
         bibliotecaContent.style.display = 'none';
@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.closeSideContent = function() {
         if (currentActivePanel) {
-            currentActivePanel.style.display = 'none'; // Ensure the current panel is hidden
+            currentActivePanel.style.display = 'none'; 
             currentActivePanel = null;
         }
-        mainButtons.style.display = 'flex'; // Show main buttons again
+        mainButtons.style.display = 'flex'; 
     };
 
     async function carregarJogosDisponiveis() {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await resposta.json();
 
             if (resposta.ok) {
-                const jogosComprados = data.jogosComprados; // Access the 'jogosComprados' property
+                const jogosComprados = data.jogosComprados;
 
                 if (jogosComprados && jogosComprados.length > 0) {
                     bibliotecaList.innerHTML = '';
