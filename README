@@ -9,7 +9,6 @@ Configuração do Banco de Dados:
 
 Com o Laragon instalado e rodando, acesse o painel do MySQL (geralmente via phpMyAdmin ou o terminal do Laragon).
 Execute o seguinte script SQL para criar o banco de dados e as tabelas necessárias:
-<!-- end list -->
 
 #SQL
 
@@ -31,12 +30,13 @@ create table usuario (
     senha varchar(50) not null
 );
 
-CREATE TABLE jogos (
+create table jogos (
     id int unsigned auto_increment primary key,
     nome VARCHAR(255) NOT NULL,
     preco DECIMAL(20,2) NOT NULL,
     produtor VARCHAR(255) NOT NULL
 );
+
 Instalação das Dependências do Projeto:
 
 Navegue até o diretório raiz do projeto em seu terminal.
