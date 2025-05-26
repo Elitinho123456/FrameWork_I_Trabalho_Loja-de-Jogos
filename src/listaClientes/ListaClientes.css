@@ -106,39 +106,6 @@ body {
     color: var(--steam-blue);
 }
 
-.loading-message {
-    text-align: center;
-    padding: 2rem;
-    color: var(--steam-blue);
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.6;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    .clientes-table {
-        display: block;
-        overflow-x: auto;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-}
 header {
     height: 104px;
     width: 100%;
@@ -158,10 +125,9 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-    background: transparent; /* Importante para não sobrescrever o gradiente do header:3 */
+    background: transparent;
 }
 
-/* Estilo para o link 'Início' no header - Adaptado de .botao_home e .botao_menu>:3 */
 .botao_home_link_estilizado {
     background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
     padding: 10px; /* Ajustado :P */
@@ -333,55 +299,6 @@ header {
     filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(102, 192, 244, 0.8));
     transform: scale(1.1);
 }
-header {
-    height: 104px;
-    width: 100%;
-    background: linear-gradient(90deg, #171a21 0%, #2a475e 100%);
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Isso empurrará o conteúdo para as extremidades */
-    padding: 0 30px; /* Mantém o preenchimento para o espaçamento geral */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.cabecalho {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: transparent;
-}
-
-/* Não há necessidade de alterar .botao_home_link_estilizado ou .home_icon_estilizado */
-
-/* Mantenha o .titulo-cabecalho como está */
-
-.logo {
-    width: 80px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
-    /* Remova qualquer margin-left ou margin-right daqui se adicionado anteriormente */
-    /* O justify-content: space-between no header cuidará do seu posicionamento */
-}
-
-/* ... o resto do seu CSS ... */
-.logo {
-    transform: translateX(-40px);
-}
-.logo {
-  width: 80px;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
-  transform: translateX(-40px);
-  animation: rotate 4s linear infinite; /* Adiciona a animação de rotação */
-}
 
 @keyframes rotate {
   from {
@@ -390,4 +307,31 @@ header {
   to {
     transform: translateX(-40px) rotate(360deg); /* Inclui translateX para manter a posição */
   }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .clientes-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
 }

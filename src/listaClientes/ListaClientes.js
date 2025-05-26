@@ -7,9 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const data = await response.json();
         const tbody = document.getElementById('usuarios-body');
-        const loading = document.getElementById('loading-message');
-
-        loading.style.display = 'none';
 
         data.usuarios.forEach(usuario => {
             const row = document.createElement('tr');
@@ -22,8 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } catch (error) {
-        document.getElementById('loading-message').style.display = 'none';
-        document.getElementById('error-message').textContent =
-            `Erro ao carregar usuários: ${error.message}`;
+        alert(`Erro ao carregar usuários: `)
+        console.log(`Erro: ${error.message}`)
     }
 });
