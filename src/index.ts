@@ -49,20 +49,6 @@ app.get('/jogos', async (request: FastifyRequest, reply: FastifyReply) => {
     if (conn) await conn.end();
   }
 });
-
-app.get('/jogos-disponiveis', async (request: FastifyRequest, reply: FastifyReply) => {
-  let conn: Connection | null = null;
-  try {
-    conn = await getConnection();
-    const [jogosDisponiveis] = await conn.query('SELECT * FROM jogos');
-    reply.send(jogosDisponiveis);
-  } catch (erro: any) {
-    handleDatabaseError(erro, reply);
-  } finally {
-    if (conn) await conn.end();
-  }
-});
-
 app.post('/compra', async (request: FastifyRequest, reply: FastifyReply) => {
     const { nome, preco, produtor } = request.body as {
       nome: string;
