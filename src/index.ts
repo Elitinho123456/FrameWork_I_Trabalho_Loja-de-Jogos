@@ -50,62 +50,62 @@ app.get('/jogos', async (request: FastifyRequest, reply: FastifyReply) => {
   }
 });
 app.post('/compra', async (request: FastifyRequest, reply: FastifyReply) => {
-    const { nome, preco, produtor } = request.body as {
-      nome: string;
-      preco: number;
-      produtor: string;
-    };
+  const { nome, preco, produtor } = request.body as {
+    nome: string;
+    preco: number;
+    produtor: string;
+  };
 
-    if (!nome || preco === undefined || produtor === undefined) {
-      return reply.status(400).send({ mensagem: 'Nome, preço e produtor são obrigatórios.' });
-    }
+  if (!nome || preco === undefined || produtor === undefined) {
+    return reply.status(400).send({ mensagem: 'Nome, preço e produtor são obrigatórios.' });
+  }
 
-    const precoNumerico = parseFloat(preco.toString());
-    if (isNaN(precoNumerico)) {
-      return reply.status(400).send({ mensagem: 'O preço deve ser um valor numérico válido.' });
-    }
+  const precoNumerico = parseFloat(preco.toString());
+  if (isNaN(precoNumerico)) {
+    return reply.status(400).send({ mensagem: 'O preço deve ser um valor numérico válido.' });
+  }
 
-    let conn: Connection | null = null;
+  let conn: Connection | null = null;
 
-    try {
-      conn = await getConnection();
+  try {
+    conn = await getConnection();
 
-      const [jogoExistente] = await conn.query(
-        'SELECT id FROM jogos WHERE nome = ?',
-        [nome]
-      );
+    const [jogoExistente] = await conn.query(
+      'SELECT id FROM jogos WHERE nome = ?',
+      [nome]
+    );
 
-      if ((jogoExistente as any[]).length === 0) {
-          return reply.status(404).send({
-              mensagem: `Erro: Jogo '${nome}' não encontrado na lista de jogos disponíveis para compra.`
-          });
-      }
-
-      const [existingComprado] = await conn.query(
-        'SELECT id FROM comprado WHERE nome = ?',
-        [nome]
-      );
-
-      if ((existingComprado as any[]).length > 0) {
-        return reply.status(400).send({
-          mensagem: `Erro: O jogo '${nome}' já foi comprado e está na sua biblioteca.`
-        });
-      }
-
-      const [resultado]: any = await conn.query(
-        'INSERT INTO comprado (nome, preco, produtor) VALUES (?, ?, ?)',
-        [nome, precoNumerico, produtor]
-      );
-
-      reply.status(201).send({
-        mensagem: 'Compra realizada com sucesso e jogo adicionado à sua biblioteca!',
-        idComprado: resultado.insertId
+    if ((jogoExistente as any[]).length === 0) {
+      return reply.status(404).send({
+        mensagem: `Erro: Jogo '${nome}' não encontrado na lista de jogos disponíveis para compra.`
       });
-    } catch (erro: any) {
-      handleDatabaseError(erro, reply);
-    } finally {
-      if (conn) await conn.end();
     }
+
+    const [existingComprado] = await conn.query(
+      'SELECT id FROM comprado WHERE nome = ?',
+      [nome]
+    );
+
+    if ((existingComprado as any[]).length > 0) {
+      return reply.status(400).send({
+        mensagem: `Erro: O jogo '${nome}' já foi comprado e está na sua biblioteca.`
+      });
+    }
+
+    const [resultado]: any = await conn.query(
+      'INSERT INTO comprado (nome, preco, produtor) VALUES (?, ?, ?)',
+      [nome, precoNumerico, produtor]
+    );
+
+    reply.status(201).send({
+      mensagem: 'Compra realizada com sucesso e jogo adicionado à sua biblioteca!',
+      idComprado: resultado.insertId
+    });
+  } catch (erro: any) {
+    handleDatabaseError(erro, reply);
+  } finally {
+    if (conn) await conn.end();
+  }
 });
 
 app.post('/usuario', async (request: FastifyRequest, reply: FastifyReply) => {
@@ -222,30 +222,42 @@ function handleDatabaseError(error: any, reply: FastifyReply) {
   const logPrefix = 'Erro no banco de dados:';
 
   switch (error.code) {
+
     case 'ER_NO_SUCH_TABLE':
       console.error(`${logPrefix} Tabela não encontrada.`, error.message);
       reply.status(500).send({ mensagem: 'Erro interno: Tabela do banco de dados não encontrada. Contate o suporte.' });
       break;
+
     case 'ER_PARSE_ERROR':
       console.error(`${logPrefix} Erro de sintaxe SQL.`, error.message);
       reply.status(500).send({ mensagem: 'Erro interno: Sintaxe SQL inválida no servidor. Contate o suporte.' });
       break;
+
     case 'ECONNREFUSED':
       console.error(`${logPrefix} Conexão recusada. Verifique se o servidor MySQL está em execução e acessível.`, error.message);
       reply.status(503).send({ mensagem: 'Serviço indisponível: Não foi possível conectar ao banco de dados. Tente novamente mais tarde.' });
       break;
+
     case 'ER_BAD_DB_ERROR':
       console.error(`${logPrefix} Banco de dados não existe.`, error.message);
       reply.status(500).send({ mensagem: 'Erro interno: O banco de dados especificado não existe ou está incorreto. Contate o suporte.' });
       break;
+
     case 'ER_ACCESS_DENIED_ERROR':
       console.error(`${logPrefix} Usuário ou senha inválidos.`, error.message);
       reply.status(401).send({ mensagem: 'Erro de autenticação: Credenciais de acesso ao banco de dados inválidas no servidor.' });
       break;
+
     case 'ER_DUP_ENTRY':
       console.error(`${logPrefix} Duplicidade de dados.`, error.message);
       reply.status(409).send({ mensagem: 'Erro de conflito: Este registro já existe no sistema.' });
       break;
+
+    case 'ER_WARN_DATA_OUT_OF_RANGE':
+      console.error(`${logPrefix} Valor fora de Alcance.`, error.message);
+      reply.status(409).send({ mensagem: 'Erro de tamanho: O limete de caracteres para o preço foi atingido.' });
+      break;
+
     default:
       console.error(`${logPrefix} Erro não tratado:`, error);
       reply.status(500).send({ mensagem: 'Erro interno no servidor. Por favor, tente novamente ou contate o suporte.' });
