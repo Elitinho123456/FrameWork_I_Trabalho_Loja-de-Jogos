@@ -1,5 +1,3 @@
-// compra.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const mainButtons = document.getElementById('mainButtons');
     const listaContent = document.getElementById('lista');
@@ -14,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const botaoMenu = document.querySelector('.botao_menu');
     const menuOpcoes = document.querySelector('.menu-opcoes');
 
-    let currentActivePanel = null; // Rastreia o painel atualmente ativo (lista ou biblioteca)
+    let currentActivePanel = null;
 
     if (botaoMenu && menuOpcoes) {
         botaoMenu.addEventListener('click', function(e) {
@@ -31,113 +29,107 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Função para alternar a exibição dos conteúdos laterais (Biblioteca ou Lista de Jogos)
     window.toggleSideContent = async function(contentType) {
-        // Esconde o painel atualmente ativo (se houver) instantaneamente
-        if (currentActivePanel) {
-            currentActivePanel.style.display = 'none';
-        }
+        // Hide all content panels and main buttons initially
+        mainButtons.style.display = 'none';
+        listaContent.style.display = 'none';
+        bibliotecaContent.style.display = 'none';
 
-        let targetPanel;
         if (contentType === 'lista') {
-            targetPanel = listaContent;
+            listaContent.style.display = 'flex';
+            currentActivePanel = listaContent;
             await carregarJogosDisponiveis();
         } else if (contentType === 'biblioteca') {
-            targetPanel = bibliotecaContent;
+            bibliotecaContent.style.display = 'flex';
+            currentActivePanel = bibliotecaContent;
             await carregarBiblioteca();
-        }
-
-        // Mostra o novo painel instantaneamente
-        if (targetPanel) {
-            targetPanel.style.display = 'flex'; // Usamos flex para alinhar o conteúdo interno
-            mainButtons.style.display = 'none'; // Esconde os botões principais
-            currentActivePanel = targetPanel; // Atualiza o painel ativo
         }
     };
 
-    // Função para fechar o conteúdo lateral e mostrar os botões principais
     window.closeSideContent = function() {
         if (currentActivePanel) {
-            currentActivePanel.style.display = 'none'; // Esconde o painel instantaneamente
-            currentActivePanel = null; // Reseta o painel ativo
+            currentActivePanel.style.display = 'none'; // Ensure the current panel is hidden
+            currentActivePanel = null;
         }
-        mainButtons.style.display = 'flex'; // Mostra os botões principais novamente
+        mainButtons.style.display = 'flex'; // Show main buttons again
     };
 
     async function carregarJogosDisponiveis() {
         jogosDisponiveisList.innerHTML = '<p>Carregando jogos...</p>';
         try {
             const resposta = await fetch('http://localhost:5000/jogos');
-            if (!resposta.ok) {
-                throw new Error(`Erro HTTP: ${resposta.status}`);
-            }
-            const dados = await resposta.json();
-            if (dados.jogos && dados.jogos.length > 0) {
-                jogosDisponiveisList.innerHTML = '';
-                const ul = document.createElement('ul');
-                ul.className = 'jogos-list';
-                dados.jogos.forEach(jogo => {
-                    const li = document.createElement('li');
-                    const precoFormatado = parseFloat(jogo.preco).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
+            const data = await resposta.json();
+
+            if (resposta.ok) {
+                const jogos = data.jogos; 
+
+                if (jogos && jogos.length > 0) {
+                    jogosDisponiveisList.innerHTML = '';
+                    const ul = document.createElement('ul');
+                    ul.classList.add('jogos-list');
+
+                    jogos.forEach(jogo => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <strong>${jogo.nome}</strong>
+                            <span>Produtor: ${jogo.produtor}</span>
+                            <span>Preço: R$ ${parseFloat(jogo.preco).toFixed(2).replace('.', ',')}</span>
+                        `;
+                        ul.appendChild(li);
                     });
-                    li.innerHTML = `
-                        <h2>${jogo.nome}</h2>
-                        <p><strong>Produtor:</strong> ${jogo.produtor}</p>
-                        <p><strong>Preço:</strong> ${precoFormatado}</p>
-                    `;
-                    ul.appendChild(li);
-                });
-                jogosDisponiveisList.appendChild(ul);
+                    jogosDisponiveisList.appendChild(ul);
+                } else {
+                    jogosDisponiveisList.innerHTML = '<p>Nenhum jogo disponível no momento.</p>';
+                }
             } else {
-                jogosDisponiveisList.innerHTML = '<p>Nenhum jogo disponível no momento.</p>';
+                jogosDisponiveisList.innerHTML = `<p>Erro ao carregar jogos: ${data.error || 'Erro desconhecido'}</p>`;
             }
-        } catch (erro) {
-            console.error('Falha ao carregar jogos disponíveis:', erro);
-            jogosDisponiveisList.innerHTML = '<p>Não foi possível carregar os jogos disponíveis. Tente novamente mais tarde.</p>';
+        } catch (error) {
+            console.error('Erro ao buscar jogos disponíveis:', error);
+            jogosDisponiveisList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar jogos.</p>';
         }
     }
 
     async function carregarBiblioteca() {
-        bibliotecaList.innerHTML = '<p>Carregando biblioteca...</p>';
+        bibliotecaList.innerHTML = '<p>Carregando sua biblioteca...</p>';
         try {
             const resposta = await fetch('http://localhost:5000/biblioteca');
-            if (!resposta.ok) {
-                throw new Error(`Erro HTTP: ${resposta.status}`);
-            }
-            const dados = await resposta.json();
-            if (dados.jogosComprados && dados.jogosComprados.length > 0) {
-                bibliotecaList.innerHTML = '';
-                const ul = document.createElement('ul');
-                ul.className = 'biblioteca-list';
-                dados.jogosComprados.forEach(jogo => {
-                    const li = document.createElement('li');
-                    const precoFormatado = parseFloat(jogo.preco).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
+            const data = await resposta.json();
+
+            if (resposta.ok) {
+                const jogosComprados = data.jogosComprados; // Access the 'jogosComprados' property
+
+                if (jogosComprados && jogosComprados.length > 0) {
+                    bibliotecaList.innerHTML = '';
+                    const ul = document.createElement('ul');
+                    ul.classList.add('biblioteca-list');
+
+                    jogosComprados.forEach(jogo => {
+                        const li = document.createElement('li');
+                        const dataCompra = new Date(jogo.data_compra).toLocaleDateString('pt-BR');
+                        const status = jogo.status_compra === 'comprado' ? 'Comprado' : jogo.status_compra;
+                        li.innerHTML = `
+                            <strong>${jogo.nome}</strong>
+                            <span>Produtor: ${jogo.produtor}</span>
+                            <span>Preço: R$ ${parseFloat(jogo.preco).toFixed(2).replace('.', ',')}</span>
+                            <span>Data da Compra: ${dataCompra}</span>
+                            <span>Status: ${status}</span>
+                        `;
+                        ul.appendChild(li);
                     });
-                    const dataCompra = new Date(jogo.data_compra).toLocaleDateString('pt-BR');
-                    li.innerHTML = `
-                        <h2>${jogo.nome}</h2>
-                        <p><strong>Produtor:</strong> ${jogo.produtor}</p>
-                        <p><strong>Preço:</strong> ${precoFormatado}</p>
-                        <p><strong>Data da Compra:</strong> ${dataCompra}</p>
-                        <p><strong>Status:</strong> ${jogo.status_compra}</p>
-                    `;
-                    ul.appendChild(li);
-                });
-                bibliotecaList.appendChild(ul);
+                    bibliotecaList.appendChild(ul);
+                } else {
+                    bibliotecaList.innerHTML = '<p>Sua biblioteca está vazia.</p>';
+                }
             } else {
-                bibliotecaList.innerHTML = '<p>Sua biblioteca está vazia.</p>';
+                bibliotecaList.innerHTML = `<p>Erro ao carregar biblioteca: ${data.error || 'Erro desconhecido'}</p>`;
             }
-        } catch (erro) {
-            console.error('Falha ao carregar biblioteca:', erro);
-            bibliotecaList.innerHTML = '<p>Não foi possível carregar sua biblioteca. Tente novamente mais tarde.</p>';
+        } catch (error) {
+            console.error('Erro ao buscar biblioteca:', error);
+            bibliotecaList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar a biblioteca.</p>';
         }
     }
 
-    // Função para tratar o envio do formulário de compra
     window.trataForm = async function() {
         const nome = nomeInput.value.trim();
         const preco = precoInput.value.trim();
@@ -150,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const jogoDados = {
             nome,
-            preco: parseFloat(preco), // Garante que o preço é um número
+            preco: parseFloat(preco),
             produtor
         };
 
@@ -167,8 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (resposta.ok) {
                 alert(result.message || 'Jogo comprado com sucesso!');
-                compraForm.reset(); // Limpa o formulário após a compra
-                // Se a biblioteca estiver aberta, recarrega para mostrar o novo item
+                compraForm.reset();
                 if (currentActivePanel === bibliotecaContent) {
                     await carregarBiblioteca();
                 }
