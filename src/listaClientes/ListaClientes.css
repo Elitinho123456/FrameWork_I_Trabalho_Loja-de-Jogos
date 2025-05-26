@@ -158,15 +158,15 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-    background: transparent; /* Importante para não sobrescrever o gradiente do header */
+    background: transparent; /* Importante para não sobrescrever o gradiente do header:3 */
 }
 
-/* Estilo para o link 'Início' no header - Adaptado de .botao_home e .botao_menu */
+/* Estilo para o link 'Início' no header - Adaptado de .botao_home e .botao_menu>:3 */
 .botao_home_link_estilizado {
     background: linear-gradient(to right, #47bfff 0%, #1a44c2 100%);
-    padding: 10px; /* Ajustado */
-    min-width: 80px; /* Largura mínima similar aos botões do menu */
-    height: 50px; /* Altura ajustada */
+    padding: 10px; /* Ajustado :P */
+    min-width: 80px; /* Largura mínima similar aos botões do menu ☆(●'◡'●)*/
+    height: 50px; /* Altura ajustadao(≧▽≦)o .｡. */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -174,9 +174,9 @@ header {
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza conteúdo do botão */
+    justify-content: center; /* Centraliza conteúdo do botão (❁´◡`❁)☆*:*/
     color: white;
-    font-size: 14px; /* Tamanho da fonte do texto */
+    font-size: 14px; /* Tamanho da fonte do textoUwU */
 }
 
 .botao_home_link_estilizado:hover {
@@ -194,21 +194,21 @@ header {
 }
 
 .botao_home_link_estilizado span {
-    background-color: transparent; /* Garante que o span não tenha fundo próprio */
+    background-color: transparent; /* Garante que o span não tenha fundo próprioOwO^o^<3:-S:-( */
 }
 
-/* Título no Cabeçalho (pode ser o <p> ou um <h1>/<h2> se preferir semanticamente) */
-.titulo-cabecalho { /* Usando a classe que definimos no HTML */
+/* Título no Cabeçalho (pode ser o <p> ou um <h1>/<h2> se preferir semanticamente):( */
+.titulo-cabecalho { /* Usando a classe que definimos no HTML <U_U*/
     color: #c7d5e0;
     font-size: 24px;
     font-weight: 300;
-    background: transparent; /* Importante */
+    background: transparent; /* Importante (eu acho) */
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .logo {
-    width: 80px; /* Mantendo o tamanho do logo do cadastroJogos */
+    width: 80px; /* Mantendo o tamanho do logo do cadastroJogos O.O */
     height: auto; /* Para manter proporção caso a imagem seja diferente */
     border-radius: 50%; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -379,7 +379,7 @@ header {
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 0 5px rgba(102, 192, 244, 0.7));
-  transform: translateX(-40px); /* Mantém o deslocamento para a esquerda */
+  transform: translateX(-40px);
   animation: rotate 4s linear infinite; /* Adiciona a animação de rotação */
 }
 
