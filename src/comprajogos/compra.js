@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    window.closeSideContent = function() {
+    // Renamed function to be more descriptive and handle showing main buttons
+    window.showMainButtons = function() {
         if (currentActivePanel) {
             currentActivePanel.style.display = 'none';
             currentActivePanel = null;
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await resposta.json();
 
             if (resposta.ok) {
-                const jogos = data.jogos;
+                const jogos = data.jogos; // Correctly access the 'jogos' array from the response object
 
                 if (jogos && jogos.length > 0) {
                     jogosDisponiveisList.innerHTML = '';
@@ -81,11 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     jogosDisponiveisList.innerHTML = '<p>Nenhum jogo disponível no momento.</p>';
                 }
             } else {
-                jogosDisponiveisList.innerHTML = `<p>Erro ao carregar jogos: ${data.error || 'Ocorreu um problema ao buscar os jogos.'}</p>`;
+                jogosDisponiveisList.innerHTML = `<p>Erro ao carregar jogos: ${data.error || 'Erro desconhecido'}</p>`;
             }
         } catch (error) {
             console.error('Erro ao buscar jogos disponíveis:', error);
-            jogosDisponiveisList.innerHTML = '<p>Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.</p>';
+            jogosDisponiveisList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar jogos.</p>';
         }
     }
 
@@ -93,10 +94,13 @@ document.addEventListener('DOMContentLoaded', function () {
         bibliotecaList.innerHTML = '<p>Carregando sua biblioteca...</p>';
         try {
             const resposta = await fetch('http://localhost:5000/biblioteca');
-            const jogosComprados = await resposta.json();
+            const data = await resposta.json(); // Parse the response JSON first
 
             if (resposta.ok) {
-                if (jogosComprados.length > 0) {
+                // Access the 'jogosComprados' property from the data object
+                const jogosComprados = data.jogosComprados; 
+
+                if (jogosComprados && jogosComprados.length > 0) {
                     bibliotecaList.innerHTML = '';
                     const ul = document.createElement('ul');
                     ul.classList.add('biblioteca-list');
@@ -119,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     bibliotecaList.innerHTML = '<p>Sua biblioteca está vazia.</p>';
                 }
             } else {
-                bibliotecaList.innerHTML = `<p>Erro ao carregar biblioteca: ${jogosComprados.error || 'Ocorreu um problema ao buscar sua biblioteca.'}</p>`;
+                bibliotecaList.innerHTML = `<p>Erro ao carregar biblioteca: ${data.error || 'Erro desconhecido'}</p>`;
             }
         } catch (error) {
             console.error('Erro ao buscar biblioteca:', error);
-            bibliotecaList.innerHTML = '<p>Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.</p>';
+            bibliotecaList.innerHTML = '<p>Erro de comunicação com o servidor ao carregar a biblioteca.</p>';
         }
     }
 
@@ -132,22 +136,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const preco = precoInput.value.trim();
         const produtor = produtorInput.value.trim();
 
-        let isValid = true;
-
-        if (!nome) {
-            alert('Por favor, preencha o nome do jogo.');
-            isValid = false;
-        }
-        if (!preco || isNaN(parseFloat(preco))) {
-            alert('Por favor, insira um preço válido para o jogo.');
-            isValid = false;
-        }
-        if (!produtor) {
-            alert('Por favor, preencha o produtor do jogo.');
-            isValid = false;
-        }
-
-        if (!isValid) {
+        if (!nome || !preco || !produtor) {
+            alert('Por favor, preencha todos os campos do jogo.');
             return;
         }
 
@@ -175,11 +165,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     await carregarBiblioteca();
                 }
             } else {
-                alert(result.error || `Erro ao efetuar a compra (status: ${resposta.status}). Tente novamente.`);
+                alert(result.error || `Erro ao efetuar a compra (status: ${resposta.status})`);
             }
         } catch (error) {
             console.error('Erro na requisição de compra:', error);
-            alert('Erro de comunicação com o servidor ao tentar comprar o jogo. Verifique sua conexão.');
+            alert('Erro de comunicação com o servidor. Tente novamente.');
         }
     };
 });
