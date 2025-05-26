@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.toggleSideContent = async function(contentType) {
+        // Hide all content panels and main buttons initially
         mainButtons.style.display = 'none';
         listaContent.style.display = 'none';
         bibliotecaContent.style.display = 'none';
@@ -45,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    window.showMainButtons = function() {
+    window.closeSideContent = function() {
         if (currentActivePanel) {
-            currentActivePanel.style.display = 'none';
+            currentActivePanel.style.display = 'none'; // Ensure the current panel is hidden
             currentActivePanel = null;
         }
-        mainButtons.style.display = 'flex';
+        mainButtons.style.display = 'flex'; // Show main buttons again
     };
 
     async function carregarJogosDisponiveis() {
@@ -93,11 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
         bibliotecaList.innerHTML = '<p>Carregando sua biblioteca...</p>';
         try {
             const resposta = await fetch('http://localhost:5000/biblioteca');
-            const data = await resposta.json(); // Parse the response JSON first
+            const data = await resposta.json();
 
             if (resposta.ok) {
-                // Access the 'jogosComprados' property from the data object
-                const jogosComprados = data.jogosComprados; 
+                const jogosComprados = data.jogosComprados; // Access the 'jogosComprados' property
 
                 if (jogosComprados && jogosComprados.length > 0) {
                     bibliotecaList.innerHTML = '';

@@ -12,10 +12,9 @@
         <div class="cabecalho">
             <div class="menu-container">
                 <button class="botao_menu" type="button" aria-label="Menu Principal">
-                    <img src="../image/menu-burger.svg" alt="MENU" width="30px" height="30px">
-                </button>
+                    <img src="../image/menu-burger.svg" alt="MENU" width="30px" height="30px"> </button>
                 <div class="menu-opcoes">
-                    <a href="#" class="opcao-menu" onclick="showMainButtons(); return false;">
+                    <a href="../Home/index.html" class="opcao-menu">
                         <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" class="menu-icone">
                         <span>Home</span>
                     </a>
@@ -23,7 +22,7 @@
                         <img src="../image/shopping-cart.svg" alt="Jogos" class="menu-icone">
                         <span>Jogos</span>
                     </a>
-                    <a href="#" class="opcao-menu" onclick="toggleSideContent('biblioteca'); return false;">
+                    <a href="../outra-pagina2/index.html" class="opcao-menu">
                         <img src="../image/apps.svg" alt="Biblioteca" class="menu-icone">
                         <span>Biblioteca</span>
                     </a>
@@ -41,16 +40,14 @@
                 <button onclick="toggleSideContent('lista')">Lista de Jogos</button>
             </div>
 
-            <div id="lista" class="content-panel" style="display: none;">
-                <button class="btn-voltar" onclick="showMainButtons()">Voltar</button>
+            <div id="lista" class="content-panel" style="display: none;"> <button class="btn-voltar" onclick="closeSideContent()">Voltar</button>
                 <div class="content-inner">
                     <h3>Jogos Disponíveis na Loja</h3>
                     <div id="jogosDisponiveisList"></div>
                 </div>
             </div>
 
-            <div id="biblioteca" class="content-panel" style="display: none;">
-                <button class="btn-voltar" onclick="showMainButtons()">Voltar</button>
+            <div id="biblioteca" class="content-panel" style="display: none;"> <button class="btn-voltar" onclick="closeSideContent()">Voltar</button>
                  <div class="content-inner">
                     <h3>Sua Biblioteca de Jogos</h3>
                     <div id="bibliotecaList"></div>
@@ -71,4 +68,4 @@
 
     <script src="compra.js"></script>
 </body>
-</html>
+</html> 
