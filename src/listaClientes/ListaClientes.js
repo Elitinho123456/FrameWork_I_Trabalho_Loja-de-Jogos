@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } catch (error) {
-        alert(`Erro ao carregar usuários: `)
-        console.log(`Erro: ${error.message}`)
+        alert(error.message)
     }
 });
